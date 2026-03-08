@@ -1,0 +1,277 @@
+@import 'tailwindcss';
+@import url('https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;500;600;700;800&display=swap');
+
+@source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
+@source '../../storage/framework/views/*.php';
+@source '../**/*.blade.php';
+@source '../**/*.js';
+
+@font-face {
+    font-family: 'Gugi';
+    src: url('/branding/fonts/Gugi-Regular.ttf') format('truetype');
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Ostrich Sans';
+    src: url('/branding/fonts/OstrichSans-Heavy.otf') format('opentype');
+    font-display: swap;
+}
+
+@theme {
+    --font-sans: 'Baloo 2', 'Gugi', ui-sans-serif, system-ui, sans-serif;
+    --font-display: 'Baloo 2', 'Gugi', sans-serif;
+    --color-brand-50: #eff6ff;
+    --color-brand-100: #dbeafe;
+    --color-brand-200: #bfdbfe;
+    --color-brand-300: #93c5fd;
+    --color-brand-400: #60a5fa;
+    --color-brand-500: #3b82f6;
+    --color-brand-600: #2563eb;
+    --color-brand-700: #1d4ed8;
+    --color-brand-800: #1e40af;
+    --color-brand-900: #1e3a8a;
+    --color-ink: #0d1324;
+    --color-muted: #4a5374;
+}
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+body {
+    @apply antialiased;
+    background: #f0f1f5;
+    color: #0a0e15;
+}
+
+.dark body {
+    background: #0a0e15;
+    color: #ffffff;
+}
+
+.dark {
+    --color-brand-50: #eff6ff;
+    --color-brand-100: #dbeafe;
+    --color-brand-200: #bfdbfe;
+    --color-brand-300: #93c5fd;
+    --color-brand-400: #60a5fa;
+    --color-brand-500: #3b82f6;
+    --color-brand-600: #2563eb;
+    --color-brand-700: #1d4ed8;
+    --color-brand-800: #1e40af;
+    --color-brand-900: #1e3a8a;
+}
+
+[x-cloak] {
+    display: none !important;
+}
+
+[data-reveal] {
+    opacity: 0;
+    transform: translateY(12px);
+    transition: transform 0.52s cubic-bezier(.22, .75, .2, 1), opacity 0.52s ease;
+    will-change: transform, opacity;
+}
+
+[data-reveal].revealed {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+    [data-reveal] {
+        opacity: 1;
+        transform: none;
+        transition: none;
+    }
+}
+
+.container-fluid {
+    @apply mx-auto w-full max-w-7xl px-6 lg:px-10;
+}
+
+.panel {
+    @apply overflow-hidden rounded-xl border bg-white;
+    border-color: transparent;
+    box-shadow: inset 0 0 0 1.35px #b8c1cf;
+    background-clip: padding-box;
+}
+
+.dark .panel {
+    border-color: transparent;
+    box-shadow: inset 0 0 0 1.35px #373f4e;
+    background: #212631;
+}
+
+.btn-primary {
+    @apply inline-flex items-center justify-center rounded-lg bg-brand-600 px-5 py-2.5 text-sm font-semibold text-white transition hover:bg-brand-500 dark:bg-brand-500 dark:text-white dark:hover:bg-brand-400;
+}
+
+.btn-secondary {
+    @apply inline-flex items-center justify-center rounded-lg border px-5 py-2.5 text-sm font-semibold transition hover:border-brand-400 hover:text-brand-700;
+    border-color: #a8b3c6;
+    color: #212631;
+}
+
+.dark .btn-secondary {
+    border-color: #4e576a;
+    color: #e0e4eb;
+}
+
+.dark .btn-secondary:hover {
+    background: transparent;
+    border-color: var(--color-brand-700);
+    color: var(--color-brand-300);
+}
+
+.brand-wordmark {
+    font-family: 'Baloo 2', 'Gugi', ui-rounded, sans-serif;
+    font-weight: 800;
+    letter-spacing: 0;
+}
+
+.chip-brand {
+    @apply inline-flex items-center rounded-full border border-brand-200 bg-brand-50 px-3 py-1 text-xs font-semibold uppercase tracking-widest text-brand-700;
+    line-height: 1;
+    white-space: nowrap;
+}
+
+.dark .chip-brand {
+    @apply border-brand-700 bg-brand-900/25 text-brand-300;
+}
+
+.admin-ui .admin-nav-link {
+    @apply flex items-center gap-2 rounded-lg px-3 py-2 transition;
+    color: #212631;
+}
+
+.admin-ui .admin-nav-link:hover {
+    background: #e0e4eb;
+    color: #1d4ed8;
+}
+
+.dark .admin-ui .admin-nav-link {
+    color: #e0e4eb;
+}
+
+.dark .admin-ui .admin-nav-link:hover {
+    background: #373f4e;
+    color: #93c5fd;
+}
+
+.admin-ui .admin-nav-link.active {
+    background: #dbeafe;
+    color: #1d4ed8;
+}
+
+.dark .admin-ui .admin-nav-link.active {
+    background: #1e3a8a33;
+    color: #93c5fd;
+}
+
+.admin-ui main input,
+.admin-ui main textarea,
+.admin-ui main select {
+    border-color: #a8b3c6 !important;
+    background: #ffffff !important;
+    color: #212631;
+}
+
+.dark .admin-ui main input,
+.dark .admin-ui main textarea,
+.dark .admin-ui main select {
+    border-color: #4e576a !important;
+    background: #212631 !important;
+    color: #ffffff;
+}
+
+.admin-ui .number-stepper input[type='number'] {
+    -moz-appearance: textfield;
+    appearance: textfield;
+}
+
+.admin-ui .number-stepper input[type='number']::-webkit-outer-spin-button,
+.admin-ui .number-stepper input[type='number']::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+.admin-ui .number-stepper {
+    position: relative;
+}
+
+.admin-ui .number-stepper input {
+    padding-right: 3rem !important;
+}
+
+.admin-ui .number-stepper-controls {
+    position: absolute;
+    right: 0.5rem;
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    border-radius: 0.5rem;
+    background: transparent;
+}
+
+.admin-ui .number-stepper-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 1.75rem;
+    height: 1.15rem;
+    color: #4e576a;
+    transition: background-color 0.15s ease, color 0.15s ease;
+}
+
+.admin-ui .number-stepper-btn + .number-stepper-btn {
+    border-top: none;
+}
+
+.admin-ui .number-stepper-btn:hover {
+    background: #eef2f8;
+    color: #1d4ed8;
+}
+
+.dark .admin-ui .number-stepper-controls {
+    background: transparent;
+}
+
+.dark .admin-ui .number-stepper-btn {
+    color: #bfc6d4;
+}
+
+.dark .admin-ui .number-stepper-btn + .number-stepper-btn {
+    border-top-color: transparent;
+}
+
+.dark .admin-ui .number-stepper-btn:hover {
+    background: #2a3140;
+    color: #93c5fd;
+}
+
+.admin-ui main table thead {
+    border-color: #b8c1cf !important;
+}
+
+.admin-ui main table tbody tr {
+    border-color: #d1d6e0 !important;
+    transition: background-color 0.2s ease;
+}
+
+.admin-ui main table tbody tr:hover {
+    background: #eef2f8;
+}
+
+.dark .admin-ui main table thead {
+    border-color: #4e576a !important;
+}
+
+.dark .admin-ui main table tbody tr {
+    border-color: #373f4e !important;
+}
+
+.dark .admin-ui main table tbody tr:hover {
+    background: #2a3140;
+}
