@@ -9,7 +9,7 @@
 <body class="admin-ui bg-[#f0f1f5] dark:bg-[#0a0e15]">
     <div
         class="grid min-h-screen lg:[grid-template-columns:var(--admin-sidebar-width)_1fr]"
-        x-data="{ sidebarCollapsed: JSON.parse(localStorage.getItem('nbtech-admin-sidebar-collapsed') ?? 'false') }"
+        x-data="{ sidebarCollapsed: JSON.parse(localStorage.getItem('nbtech-admin-sidebar-collapsed') ?? 'false'), mobileMenuOpen: false }"
         x-init="$watch('sidebarCollapsed', value => localStorage.setItem('nbtech-admin-sidebar-collapsed', JSON.stringify(value)))"
         style="--admin-sidebar-width: 290px"
         :style="`--admin-sidebar-width:${sidebarCollapsed ? '84px' : '290px'}`"
@@ -81,20 +81,45 @@
         </aside>
 
         <div>
-            <header class="sticky top-0 z-30 border-b border-[#aeb8c9] bg-white/90 px-6 py-4 backdrop-blur dark:border-[#373f4e] dark:bg-[#212631]/95 lg:px-10">
-                <div class="flex items-center justify-between">
-                    <h1 class="font-display text-5xl leading-none">@yield('heading', 'Dashboard')</h1>
-                    <div class="flex items-center gap-3">
+            <header class="sticky top-0 z-30 border-b border-[#aeb8c9] bg-white/90 px-4 py-3 backdrop-blur dark:border-[#373f4e] dark:bg-[#212631]/95 sm:px-6 lg:px-10">
+                <div class="flex items-center justify-between gap-3">
+                    <h1 class="font-display text-3xl leading-none sm:text-4xl lg:text-5xl">@yield('heading', 'Dashboard')</h1>
+                    <div class="flex items-center gap-2 sm:gap-3">
+                        <button
+                            type="button"
+                            class="inline-flex h-10 w-10 items-center justify-center rounded-lg border border-[#a8b3c6] text-[#212631] transition hover:bg-[#e0e4eb] dark:border-[#4e576a] dark:text-[#e0e4eb] dark:hover:bg-[#2a3140] lg:hidden"
+                            @click="mobileMenuOpen = !mobileMenuOpen"
+                            :aria-expanded="mobileMenuOpen"
+                            aria-label="Alternar navegação"
+                        >
+                            <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M4 7h16M4 12h16M4 17h16" x-show="!mobileMenuOpen" />
+                                <path d="M6 6l12 12M18 6 6 18" x-show="mobileMenuOpen" />
+                            </svg>
+                        </button>
                         @include('partials.theme-toggle')
-                        <form method="POST" action="{{ route('logout') }}">
+                        <form method="POST" action="{{ route('logout') }}" class="hidden sm:block">
                             @csrf
                             <button type="submit" class="btn-secondary">Terminar sessão</button>
                         </form>
                     </div>
                 </div>
+
+                <div x-show="mobileMenuOpen" x-transition.opacity class="mt-3 space-y-2 rounded-xl border border-[#b8c1cf] bg-white p-3 text-sm dark:border-[#4e576a] dark:bg-[#212631] lg:hidden">
+                    <a href="{{ route('admin.dashboard') }}" class="admin-nav-link {{ request()->routeIs('admin.dashboard') ? 'active' : '' }}">Dashboard</a>
+                    <a href="{{ route('admin.projects.index') }}" class="admin-nav-link {{ request()->routeIs('admin.projects.*') ? 'active' : '' }}">Projetos</a>
+                    <a href="{{ route('admin.quotes.index') }}" class="admin-nav-link {{ request()->routeIs('admin.quotes.*') ? 'active' : '' }}">Orçamentos</a>
+                    <a href="{{ route('admin.services.index') }}" class="admin-nav-link {{ request()->routeIs('admin.services.*') ? 'active' : '' }}">Serviços</a>
+                    <a href="{{ route('admin.testimonials.index') }}" class="admin-nav-link {{ request()->routeIs('admin.testimonials.*') ? 'active' : '' }}">Testemunhos</a>
+                    <a href="{{ route('admin.messages.index') }}" class="admin-nav-link {{ request()->routeIs('admin.messages.*') ? 'active' : '' }}">Mensagens</a>
+                    <form method="POST" action="{{ route('logout') }}" class="pt-1">
+                        @csrf
+                        <button type="submit" class="btn-secondary w-full">Terminar sessão</button>
+                    </form>
+                </div>
             </header>
 
-            <main class="px-6 py-7 lg:px-10">
+            <main class="px-4 py-5 sm:px-6 sm:py-6 lg:px-10 lg:py-7">
                 @if (session('status'))
                     <div class="mb-6 rounded-xl border border-emerald-300 bg-emerald-50 p-3 text-sm text-emerald-700 dark:border-emerald-700 dark:bg-emerald-950/40 dark:text-emerald-300">
                         {{ session('status') }}

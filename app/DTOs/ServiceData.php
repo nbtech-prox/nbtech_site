@@ -8,6 +8,7 @@ class ServiceData
         public readonly string $title,
         public readonly string $description,
         public readonly ?string $icon,
+        public readonly ?string $imageUrl,
         public readonly int $order,
     ) {}
 
@@ -17,6 +18,7 @@ class ServiceData
             title: $payload['title'],
             description: $payload['description'],
             icon: $payload['icon'] ?? null,
+            imageUrl: $payload['image_url'] ?? null,
             order: (int) ($payload['order'] ?? 0),
         );
     }
@@ -27,6 +29,7 @@ class ServiceData
             'title' => $this->title,
             'description' => $this->description,
             'icon' => $this->icon,
+            'image_url' => $this->imageUrl,
             'order' => $this->order,
         ];
     }

@@ -4,7 +4,7 @@
 @section('heading', 'Editar serviço')
 
 @section('content')
-    <form method="POST" action="{{ route('admin.services.update', $service) }}" class="panel p-6">
+    <form method="POST" action="{{ route('admin.services.update', $service) }}" enctype="multipart/form-data" class="panel p-6">
         @csrf
         @method('PUT')
         @include('admin.services._form', ['service' => $service])

@@ -5,12 +5,12 @@
 
 @section('content')
     <div class="mb-4 flex flex-wrap items-center justify-between gap-3">
-        <form method="GET" class="flex gap-2">
-            <input type="text" name="q" value="{{ $filters['q'] }}" placeholder="Pesquisar" class="rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm dark:border-slate-700 dark:bg-slate-900">
-            <input type="text" name="category" value="{{ $filters['category'] }}" placeholder="Categoria" class="rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm dark:border-slate-700 dark:bg-slate-900">
-            <button class="btn-secondary" type="submit">Filtrar</button>
+        <form method="GET" class="flex w-full flex-col gap-2 sm:w-auto sm:flex-row">
+            <input type="text" name="q" value="{{ $filters['q'] }}" placeholder="Pesquisar" class="w-full rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm sm:w-56 dark:border-slate-700 dark:bg-slate-900">
+            <input type="text" name="category" value="{{ $filters['category'] }}" placeholder="Categoria" class="w-full rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm sm:w-44 dark:border-slate-700 dark:bg-slate-900">
+            <button class="btn-secondary w-full sm:w-auto" type="submit">Filtrar</button>
         </form>
-        <a href="{{ route('admin.projects.create') }}" class="btn-primary">Novo projeto</a>
+        <a href="{{ route('admin.projects.create') }}" class="btn-primary w-full sm:w-auto">Novo projeto</a>
     </div>
 
     <div class="panel overflow-x-auto">
