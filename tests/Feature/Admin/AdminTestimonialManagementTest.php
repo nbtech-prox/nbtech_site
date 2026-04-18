@@ -74,4 +74,36 @@ class AdminTestimonialManagementTest extends TestCase
         $deleteResponse->assertRedirect(route('admin.testimonials.index'));
         $this->assertDatabaseMissing('testimonials', ['id' => $testimonial->id]);
     }
+
+    public function test_admin_testimonial_search_respects_selected_status(): void
+    {
+        Role::findOrCreate('admin');
+
+        $admin = User::factory()->create();
+        $admin->assignRole('admin');
+
+        Testimonial::query()->create([
+            'name' => 'Ana Silva',
+            'company' => 'Acme Lda',
+            'quote' => 'Testemunho aprovado que não devia aparecer ao filtrar pendentes.',
+            'rating' => 5,
+            'status' => 'approved',
+        ]);
+
+        Testimonial::query()->create([
+            'name' => 'Bruno Costa',
+            'company' => 'Outra Empresa',
+            'quote' => 'Testemunho pendente sobre outro assunto que deve continuar listado.',
+            'rating' => 4,
+            'status' => 'pending',
+        ]);
+
+        $response = $this->actingAs($admin)->get(route('admin.testimonials.index', [
+            'q' => 'Acme',
+            'status' => 'pending',
+        ]));
+
+        $response->assertOk();
+        $response->assertDontSee('Ana Silva');
+    }
 }

@@ -12,27 +12,27 @@
 
         <div class="max-w-5xl space-y-6" data-reveal>
             <span class="chip-brand">Sobre a NBTech</span>
-            <h1 class="font-display text-7xl leading-none">Construímos produtos digitais que geram resultados reais</h1>
+            <h1 class="font-display text-2xl leading-[1.02] sm:text-3xl md:text-4xl xl:text-[2.35rem]">Construímos produtos digitais que geram resultados reais</h1>
             <p class="max-w-4xl text-lg text-[#4e576a] dark:text-[#e0e4eb]">A NBTech combina estratégia, design e engenharia para transformar objetivos de negócio em experiências digitais rápidas, escaláveis e orientadas à conversão. Trabalhamos com foco em execução, clareza técnica e impacto mensurável em cada entrega.</p>
         </div>
 
         <div class="mt-10 grid gap-4 sm:grid-cols-2 xl:grid-cols-4" data-reveal>
-            <article class="panel p-5">
+            <article class="rounded-[1.6rem] border border-[#cad4e3] bg-white/90 p-5 dark:border-[#2f3b4d] dark:bg-[#111823]">
                 <p class="text-xs font-semibold uppercase tracking-widest text-brand-600">Foco</p>
                 <h2 class="mt-2 text-2xl font-semibold">Performance</h2>
                 <p class="mt-2 text-sm text-[#4e576a] dark:text-[#e0e4eb]">Arquiteturas leves, frontend rápido e backend preparado para crescer sem fricção.</p>
             </article>
-            <article class="panel p-5">
+            <article class="rounded-[1.6rem] border border-[#cad4e3] bg-white/90 p-5 dark:border-[#2f3b4d] dark:bg-[#111823]">
                 <p class="text-xs font-semibold uppercase tracking-widest text-brand-600">Método</p>
                 <h2 class="mt-2 text-2xl font-semibold">Entrega contínua</h2>
                 <p class="mt-2 text-sm text-[#4e576a] dark:text-[#e0e4eb]">Planeamento por fases, validação constante e melhorias iterativas com prioridade no que gera valor.</p>
             </article>
-            <article class="panel p-5">
+            <article class="rounded-[1.6rem] border border-[#cad4e3] bg-white/90 p-5 dark:border-[#2f3b4d] dark:bg-[#111823]">
                 <p class="text-xs font-semibold uppercase tracking-widest text-brand-600">Qualidade</p>
                 <h2 class="mt-2 text-2xl font-semibold">Código sólido</h2>
                 <p class="mt-2 text-sm text-[#4e576a] dark:text-[#e0e4eb]">Boas práticas, estrutura limpa e manutenção simplificada para reduzir risco técnico no longo prazo.</p>
             </article>
-            <article class="panel p-5">
+            <article class="rounded-[1.6rem] border border-[#cad4e3] bg-white/90 p-5 dark:border-[#2f3b4d] dark:bg-[#111823]">
                 <p class="text-xs font-semibold uppercase tracking-widest text-brand-600">Parceria</p>
                 <h2 class="mt-2 text-2xl font-semibold">Visão de negócio</h2>
                 <p class="mt-2 text-sm text-[#4e576a] dark:text-[#e0e4eb]">Decisões técnicas alinhadas com objetivos comerciais, aquisição de clientes e retenção.</p>
@@ -40,8 +40,8 @@
         </div>
 
         <div class="mt-10 grid gap-6 xl:grid-cols-[1.1fr_0.9fr]" data-reveal>
-            <article class="panel p-6 md:p-8">
-                <h2 class="font-display text-4xl leading-none">Como trabalhamos</h2>
+            <article class="rounded-[1.8rem] border border-[#cad4e3] bg-white/90 p-6 dark:border-[#2f3b4d] dark:bg-[#111823] md:p-8">
+                <h2 class="font-display text-2xl leading-[1.02] sm:text-3xl xl:text-[2.15rem]">Como trabalhamos</h2>
                 <div class="mt-6 grid gap-4 md:grid-cols-3">
                     <div class="rounded-xl border border-[#aeb8c9] bg-white p-4 dark:border-[#4e576a] dark:bg-[#212631]">
                         <p class="text-xs font-semibold uppercase tracking-widest text-brand-600">01</p>
@@ -61,8 +61,8 @@
                 </div>
             </article>
 
-            <article class="panel p-6 md:p-8">
-                <h2 class="font-display text-4xl leading-none">O que defendemos</h2>
+            <article class="rounded-[1.8rem] border border-[#cad4e3] bg-white/90 p-6 dark:border-[#2f3b4d] dark:bg-[#111823] md:p-8">
+                <h2 class="font-display text-2xl leading-[1.02] sm:text-3xl xl:text-[2.15rem]">O que defendemos</h2>
                 <ul class="mt-5 space-y-3 text-sm text-[#4e576a] dark:text-[#e0e4eb]">
                     <li class="rounded-lg border border-[#aeb8c9] bg-white px-4 py-3 dark:border-[#4e576a] dark:bg-[#212631]"><strong class="text-zinc-900 dark:text-white">Clareza:</strong> sem jargão desnecessário, com decisões explicadas de forma objetiva.</li>
                     <li class="rounded-lg border border-[#aeb8c9] bg-white px-4 py-3 dark:border-[#4e576a] dark:bg-[#212631]"><strong class="text-zinc-900 dark:text-white">Responsabilidade:</strong> compromisso com prazos, qualidade e resultados acordados.</li>
@@ -73,7 +73,7 @@
 
         <div class="mt-12 grid gap-6 md:grid-cols-2">
             @foreach ($testimonials as $testimonial)
-                <article class="panel p-6" data-reveal>
+                <article class="rounded-[1.6rem] border border-[#cad4e3] bg-white/90 p-6 dark:border-[#2f3b4d] dark:bg-[#111823]" data-reveal>
                     <div class="mb-4 text-sm font-semibold">
                         {{ $testimonial->name }}
                         @if($testimonial->company)
@@ -92,8 +92,8 @@
             @endforeach
         </div>
 
-        <div class="mt-12 panel p-6 md:p-8" data-reveal>
-            <h2 class="font-display text-4xl leading-none">Partilha a tua experiência</h2>
+        <div class="mt-12 rounded-[1.8rem] border border-[#cad4e3] bg-white/90 p-6 dark:border-[#2f3b4d] dark:bg-[#111823] md:p-8" data-reveal>
+            <h2 class="font-display text-2xl leading-[1.02] sm:text-3xl xl:text-[2.15rem]">Partilha a tua experiência</h2>
             <p class="mt-3 text-sm text-[#4e576a] dark:text-[#e0e4eb]">Envia o teu testemunho. Após validação da nossa equipa, ele pode ser publicado no site.</p>
 
             @if ($errors->any())

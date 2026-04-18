@@ -3,6 +3,7 @@
 namespace App\Repositories;
 
 use App\Models\Testimonial;
+use App\Support\TestimonialStatuses;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Database\Eloquent\Collection;
 
@@ -11,7 +12,7 @@ class TestimonialRepository
     public function latest(int $limit = 6): Collection
     {
         return Testimonial::query()
-            ->where('status', 'approved')
+            ->where('status', TestimonialStatuses::APPROVED)
             ->latest()
             ->limit($limit)
             ->get();
@@ -21,10 +22,12 @@ class TestimonialRepository
     {
         return Testimonial::query()
             ->when($status, fn ($query) => $query->where('status', $status))
-            ->when($search, fn ($query) => $query
-                ->where('name', 'like', "%{$search}%")
-                ->orWhere('company', 'like', "%{$search}%")
-                ->orWhere('quote', 'like', "%{$search}%"))
+            ->when($search, fn ($query) => $query->where(function ($searchQuery) use ($search): void {
+                $searchQuery
+                    ->where('name', 'like', "%{$search}%")
+                    ->orWhere('company', 'like', "%{$search}%")
+                    ->orWhere('quote', 'like', "%{$search}%");
+            }))
             ->latest()
             ->paginate(12)
             ->withQueryString();

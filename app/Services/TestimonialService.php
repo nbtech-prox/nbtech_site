@@ -5,6 +5,7 @@ namespace App\Services;
 use App\DTOs\TestimonialData;
 use App\Models\Testimonial;
 use App\Repositories\TestimonialRepository;
+use App\Support\TestimonialStatuses;
 
 class TestimonialService
 {
@@ -16,7 +17,7 @@ class TestimonialService
     }
 
     /**
-     * @param array<string, mixed> $payload
+     * @param  array<string, mixed>  $payload
      */
     public function createFromPublic(array $payload): Testimonial
     {
@@ -26,7 +27,7 @@ class TestimonialService
             'company_url' => $payload['company_url'] ?? null,
             'quote' => $payload['quote'],
             'rating' => (int) ($payload['rating'] ?? 5),
-            'status' => 'pending',
+            'status' => TestimonialStatuses::PENDING,
         ]);
     }
 

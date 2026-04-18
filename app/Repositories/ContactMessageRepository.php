@@ -12,12 +12,14 @@ class ContactMessageRepository
         return ContactMessage::query()->create($attributes);
     }
 
-    public function latestPaginated(?string $search = null): LengthAwarePaginator
+    public function latestPaginated(?string $search = null, ?string $type = null): LengthAwarePaginator
     {
         return ContactMessage::query()
+            ->when($type, fn ($query) => $query->where('type', $type))
             ->when($search, fn ($query) => $query->where(function ($inner) use ($search): void {
                 $inner->where('name', 'like', "%{$search}%")
-                    ->orWhere('email', 'like', "%{$search}%");
+                    ->orWhere('email', 'like', "%{$search}%")
+                    ->orWhere('company', 'like', "%{$search}%");
             }))
             ->latest('created_at')
             ->paginate(20)

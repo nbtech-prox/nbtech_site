@@ -7,6 +7,7 @@ use App\Http\Controllers\Admin\QuoteController as AdminQuoteController;
 use App\Http\Controllers\Admin\ServiceController as AdminServiceController;
 use App\Http\Controllers\Admin\TestimonialController as AdminTestimonialController;
 use App\Http\Controllers\Web\AboutController;
+use App\Http\Controllers\Web\BudgetRequestController;
 use App\Http\Controllers\Web\ContactController;
 use App\Http\Controllers\Web\HomeController;
 use App\Http\Controllers\Web\PortfolioController;
@@ -16,12 +17,15 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', HomeController::class)->name('home');
 Route::get('/servicos', ServiceController::class)->name('services.index');
+Route::get('/servicos/{service:slug}', [ServiceController::class, 'show'])->name('services.show');
 Route::get('/portfolio', [PortfolioController::class, 'index'])->name('portfolio.index');
 Route::get('/portfolio/{project:slug}', [PortfolioController::class, 'show'])->name('portfolio.show');
 Route::get('/sobre', AboutController::class)->name('about');
-Route::post('/testemunhos', [TestimonialSubmissionController::class, 'store'])->name('testimonials.store');
+Route::post('/testemunhos', [TestimonialSubmissionController::class, 'store'])->middleware('throttle:public-submissions')->name('testimonials.store');
+Route::get('/orcamento', [BudgetRequestController::class, 'index'])->name('budget.index');
+Route::post('/orcamento', [BudgetRequestController::class, 'store'])->middleware('throttle:public-submissions')->name('budget.store');
 Route::get('/contacto', [ContactController::class, 'index'])->name('contact.index');
-Route::post('/contacto', [ContactController::class, 'store'])->name('contact.store');
+Route::post('/contacto', [ContactController::class, 'store'])->middleware('throttle:public-submissions')->name('contact.store');
 
 Route::middleware(['auth', 'admin.role'])->prefix('admin')->name('admin.')->group(function () {
     Route::get('/', DashboardController::class)->name('dashboard');

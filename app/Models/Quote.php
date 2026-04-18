@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Support\QuoteStatuses;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -46,5 +47,15 @@ class Quote extends Model
     public function items(): HasMany
     {
         return $this->hasMany(QuoteItem::class)->orderBy('position');
+    }
+
+    public function canMarkInvoiced(): bool
+    {
+        return $this->status === QuoteStatuses::DRAFT;
+    }
+
+    public function canMarkPaid(): bool
+    {
+        return $this->status === QuoteStatuses::EMITTED;
     }
 }

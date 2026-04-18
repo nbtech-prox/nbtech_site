@@ -3,6 +3,7 @@
 namespace App\Http\Requests\Admin;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Str;
 use Illuminate\Validation\Rule;
 
 class UpdateProjectRequest extends FormRequest
@@ -40,5 +41,16 @@ class UpdateProjectRequest extends FormRequest
             'gallery_images.*' => ['image', 'mimes:jpg,jpeg,png,webp', 'max:4096'],
             'og_image' => ['nullable', 'image', 'mimes:jpg,jpeg,png,webp', 'max:4096'],
         ];
+    }
+
+    protected function prepareForValidation(): void
+    {
+        $title = trim((string) $this->input('title'));
+        $slug = trim((string) $this->input('slug'));
+
+        $this->merge([
+            'title' => $title,
+            'slug' => Str::slug($slug !== '' ? $slug : $title),
+        ]);
     }
 }

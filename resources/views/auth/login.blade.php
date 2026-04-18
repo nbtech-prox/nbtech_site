@@ -34,9 +34,30 @@
                         <label for="email" class="mb-1 block text-sm font-medium">Email</label>
                         <input id="email" name="email" type="email" required autofocus class="w-full rounded-xl border border-[#9ea9bc] bg-white px-4 py-2.5 text-sm dark:border-[#4e576a] dark:bg-[#212631] dark:text-[#ffffff]" value="{{ old('email') }}">
                     </div>
-                    <div>
+                    <div x-data="{ showPassword: false }">
                         <label for="password" class="mb-1 block text-sm font-medium">Password</label>
-                        <input id="password" name="password" type="password" required class="w-full rounded-xl border border-[#9ea9bc] bg-white px-4 py-2.5 text-sm dark:border-[#4e576a] dark:bg-[#212631] dark:text-[#ffffff]">
+                        <div class="relative">
+                            <input id="password" name="password" :type="showPassword ? 'text' : 'password'" required class="w-full rounded-xl border border-[#9ea9bc] bg-white px-4 py-2.5 pr-12 text-sm dark:border-[#4e576a] dark:bg-[#212631] dark:text-[#ffffff]">
+                            <button
+                                type="button"
+                                data-password-toggle
+                                aria-label="Mostrar password"
+                                @click="showPassword = ! showPassword"
+                                x-bind:aria-label="showPassword ? 'Ocultar password' : 'Mostrar password'"
+                                class="absolute right-2 top-1/2 inline-flex h-8 w-8 -translate-y-1/2 items-center justify-center rounded-md text-[#7a8497] transition hover:text-brand-600 focus-visible:text-brand-600 dark:text-[#aeb8c9] dark:hover:text-brand-300"
+                            >
+                                <svg x-show="!showPassword" x-cloak class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                    <path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7-10-7-10-7Z" />
+                                    <circle cx="12" cy="12" r="3" />
+                                </svg>
+                                <svg x-show="showPassword" x-cloak class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                    <path d="M3 3l18 18" />
+                                    <path d="M10.6 10.7a3 3 0 0 0 4.2 4.2" />
+                                    <path d="M9.9 5.1A10.9 10.9 0 0 1 12 5c6.5 0 10 7 10 7a18.6 18.6 0 0 1-3.2 4.2" />
+                                    <path d="M6.7 6.7A18.2 18.2 0 0 0 2 12s3.5 7 10 7a10.7 10.7 0 0 0 5.3-1.3" />
+                                </svg>
+                            </button>
+                        </div>
                     </div>
                     <label class="flex items-center gap-2 text-sm text-[#4e576a] dark:text-[#e0e4eb]">
                         <input type="checkbox" name="remember" class="rounded border-[#9ea9bc]">
