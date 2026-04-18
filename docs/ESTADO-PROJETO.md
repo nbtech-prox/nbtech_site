@@ -47,7 +47,7 @@
   - política de backups
 
 ## Decisões técnicas
-- MariaDB via driver `mysql` do Laravel
+- PostgreSQL via driver `pgsql` do Laravel
 - Redis para cache, sessões e filas
 - Área admin protegida por `auth` + role `admin`
 - Media Library para capa/galeria/OG image de projetos

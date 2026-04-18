@@ -102,7 +102,7 @@ php artisan test --profile
 ```
 
 ## Test Environment Notes
-- `phpunit.xml` uses MySQL and expects `nbtech_test`
+- `phpunit.xml` uses PostgreSQL and expects `nbtech_test`
 - Many tests use `RefreshDatabase`
 - Ensure the test DB exists before running DB-backed tests
 - Do not copy secrets from `.env` or test config into docs, commits, or logs
