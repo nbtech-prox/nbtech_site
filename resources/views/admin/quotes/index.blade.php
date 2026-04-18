@@ -5,11 +5,11 @@
 
 @section('content')
     <div class="mb-4 flex flex-wrap items-center justify-between gap-3">
-        <form method="GET" class="flex gap-2">
-            <input type="text" name="q" value="{{ $search }}" placeholder="Pesquisar por número, título ou cliente" class="rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm dark:border-slate-700 dark:bg-slate-900">
-            <button class="btn-secondary" type="submit">Pesquisar</button>
+        <form method="GET" class="flex w-full flex-col gap-2 sm:w-auto sm:flex-row">
+            <input type="text" name="q" value="{{ $search }}" placeholder="Pesquisar por número, título ou cliente" class="w-full rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm sm:w-80 dark:border-slate-700 dark:bg-slate-900">
+            <button class="btn-secondary w-full sm:w-auto" type="submit">Pesquisar</button>
         </form>
-        <a href="{{ route('admin.quotes.create') }}" class="btn-primary">Novo orçamento</a>
+        <a href="{{ route('admin.quotes.create') }}" class="btn-primary w-full sm:w-auto">Novo orçamento</a>
     </div>
 
     <div class="panel overflow-x-auto">

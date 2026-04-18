@@ -10,10 +10,65 @@
             </div>
         @endif
 
-        <div class="max-w-3xl space-y-5" data-reveal>
-            <span class="chip-brand">Sobre</span>
-            <h1 class="font-display text-7xl leading-none">Tecnologia com visão de produto</h1>
-            <p class="text-lg text-[#4e576a] dark:text-[#e0e4eb]">A NBTech é uma empresa digital orientada à entrega de soluções modernas, com arquitetura limpa e foco em performance.</p>
+        <div class="max-w-5xl space-y-6" data-reveal>
+            <span class="chip-brand">Sobre a NBTech</span>
+            <h1 class="font-display text-7xl leading-none">Construímos produtos digitais que geram resultados reais</h1>
+            <p class="max-w-4xl text-lg text-[#4e576a] dark:text-[#e0e4eb]">A NBTech combina estratégia, design e engenharia para transformar objetivos de negócio em experiências digitais rápidas, escaláveis e orientadas à conversão. Trabalhamos com foco em execução, clareza técnica e impacto mensurável em cada entrega.</p>
+        </div>
+
+        <div class="mt-10 grid gap-4 sm:grid-cols-2 xl:grid-cols-4" data-reveal>
+            <article class="panel p-5">
+                <p class="text-xs font-semibold uppercase tracking-widest text-brand-600">Foco</p>
+                <h2 class="mt-2 text-2xl font-semibold">Performance</h2>
+                <p class="mt-2 text-sm text-[#4e576a] dark:text-[#e0e4eb]">Arquiteturas leves, frontend rápido e backend preparado para crescer sem fricção.</p>
+            </article>
+            <article class="panel p-5">
+                <p class="text-xs font-semibold uppercase tracking-widest text-brand-600">Método</p>
+                <h2 class="mt-2 text-2xl font-semibold">Entrega contínua</h2>
+                <p class="mt-2 text-sm text-[#4e576a] dark:text-[#e0e4eb]">Planeamento por fases, validação constante e melhorias iterativas com prioridade no que gera valor.</p>
+            </article>
+            <article class="panel p-5">
+                <p class="text-xs font-semibold uppercase tracking-widest text-brand-600">Qualidade</p>
+                <h2 class="mt-2 text-2xl font-semibold">Código sólido</h2>
+                <p class="mt-2 text-sm text-[#4e576a] dark:text-[#e0e4eb]">Boas práticas, estrutura limpa e manutenção simplificada para reduzir risco técnico no longo prazo.</p>
+            </article>
+            <article class="panel p-5">
+                <p class="text-xs font-semibold uppercase tracking-widest text-brand-600">Parceria</p>
+                <h2 class="mt-2 text-2xl font-semibold">Visão de negócio</h2>
+                <p class="mt-2 text-sm text-[#4e576a] dark:text-[#e0e4eb]">Decisões técnicas alinhadas com objetivos comerciais, aquisição de clientes e retenção.</p>
+            </article>
+        </div>
+
+        <div class="mt-10 grid gap-6 xl:grid-cols-[1.1fr_0.9fr]" data-reveal>
+            <article class="panel p-6 md:p-8">
+                <h2 class="font-display text-4xl leading-none">Como trabalhamos</h2>
+                <div class="mt-6 grid gap-4 md:grid-cols-3">
+                    <div class="rounded-xl border border-[#aeb8c9] bg-white p-4 dark:border-[#4e576a] dark:bg-[#212631]">
+                        <p class="text-xs font-semibold uppercase tracking-widest text-brand-600">01</p>
+                        <h3 class="mt-2 text-base font-semibold">Diagnóstico</h3>
+                        <p class="mt-2 text-sm text-[#4e576a] dark:text-[#e0e4eb]">Mapeamos contexto, metas e prioridades para evitar retrabalho.</p>
+                    </div>
+                    <div class="rounded-xl border border-[#aeb8c9] bg-white p-4 dark:border-[#4e576a] dark:bg-[#212631]">
+                        <p class="text-xs font-semibold uppercase tracking-widest text-brand-600">02</p>
+                        <h3 class="mt-2 text-base font-semibold">Implementação</h3>
+                        <p class="mt-2 text-sm text-[#4e576a] dark:text-[#e0e4eb]">Desenvolvemos com ciclos curtos, validação frequente e comunicação transparente.</p>
+                    </div>
+                    <div class="rounded-xl border border-[#aeb8c9] bg-white p-4 dark:border-[#4e576a] dark:bg-[#212631]">
+                        <p class="text-xs font-semibold uppercase tracking-widest text-brand-600">03</p>
+                        <h3 class="mt-2 text-base font-semibold">Escala</h3>
+                        <p class="mt-2 text-sm text-[#4e576a] dark:text-[#e0e4eb]">Otimização contínua com foco em estabilidade, conversão e crescimento.</p>
+                    </div>
+                </div>
+            </article>
+
+            <article class="panel p-6 md:p-8">
+                <h2 class="font-display text-4xl leading-none">O que defendemos</h2>
+                <ul class="mt-5 space-y-3 text-sm text-[#4e576a] dark:text-[#e0e4eb]">
+                    <li class="rounded-lg border border-[#aeb8c9] bg-white px-4 py-3 dark:border-[#4e576a] dark:bg-[#212631]"><strong class="text-zinc-900 dark:text-white">Clareza:</strong> sem jargão desnecessário, com decisões explicadas de forma objetiva.</li>
+                    <li class="rounded-lg border border-[#aeb8c9] bg-white px-4 py-3 dark:border-[#4e576a] dark:bg-[#212631]"><strong class="text-zinc-900 dark:text-white">Responsabilidade:</strong> compromisso com prazos, qualidade e resultados acordados.</li>
+                    <li class="rounded-lg border border-[#aeb8c9] bg-white px-4 py-3 dark:border-[#4e576a] dark:bg-[#212631]"><strong class="text-zinc-900 dark:text-white">Evolução:</strong> melhoria contínua em produto, processos e experiência do utilizador.</li>
+                </ul>
+            </article>
         </div>
 
         <div class="mt-12 grid gap-6 md:grid-cols-2">

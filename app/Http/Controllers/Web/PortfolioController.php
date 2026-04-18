@@ -20,11 +20,15 @@ class PortfolioController extends Controller
     {
         abort_if(! $project->published, 404);
 
+        $galleryMedia = $project->getMedia('gallery');
+        $galleryItems = $project->previewGalleryItems();
+
         return view('web.portfolio.show', [
             'project' => $project,
-            'gallery' => $project->getMedia('gallery'),
-            'cover' => $project->getFirstMediaUrl('cover'),
-            'ogImage' => $project->getFirstMediaUrl('og_image') ?: $project->getFirstMediaUrl('cover'),
+            'gallery' => $galleryMedia,
+            'galleryItems' => $galleryItems,
+            'cover' => $project->previewCoverUrl(),
+            'ogImage' => $project->previewOgUrl(),
         ]);
     }
 }

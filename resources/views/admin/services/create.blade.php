@@ -4,7 +4,7 @@
 @section('heading', 'Novo serviço')
 
 @section('content')
-    <form method="POST" action="{{ route('admin.services.store') }}" class="panel p-6">
+    <form method="POST" action="{{ route('admin.services.store') }}" enctype="multipart/form-data" class="panel p-6">
         @csrf
         @include('admin.services._form')
         <div class="mt-6 flex gap-3">
