@@ -2,6 +2,4 @@
 
 namespace App\Http\Requests\Admin;
 
-class UpdateQuoteRequest extends StoreQuoteRequest
-{
-}
+class UpdateQuoteRequest extends StoreQuoteRequest {}

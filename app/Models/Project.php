@@ -92,25 +92,7 @@ class Project extends Model implements HasMedia
             return $legacyGallery;
         }
 
-        return collect(match ($this->slug) {
-            'popsmart-pt' => [
-                ['src' => 'https://popsmart.pt/wp-content/uploads/2026/01/11X-Preto.jpg', 'alt' => 'PopSmart Smartwatch S11 Preto'],
-                ['src' => 'https://popsmart.pt/wp-content/uploads/2026/01/11X-Prata.jpg', 'alt' => 'PopSmart Smartwatch S11 Prata'],
-                ['src' => 'https://popsmart.pt/wp-content/uploads/2026/01/Ultra-5-Pro-Preto.jpg', 'alt' => 'PopSmart Smartwatch Ultra 5 Pro'],
-                ['src' => 'https://popsmart.pt/wp-content/uploads/2024/11/design-sem-nome.zip-1-2-scaled.png', 'alt' => 'PopSmart Kit AI-60 12 em 1'],
-                ['src' => 'https://popsmart.pt/wp-content/uploads/2025/01/escova_styler_5_em_1_foto2.jpg', 'alt' => 'PopSmart Outros artigos'],
-                ['src' => 'https://popsmart.pt/wp-content/uploads/2025/04/airpods4.png', 'alt' => 'PopSmart AirPods e InPods'],
-            ],
-            'ecovinyl-nbtech-pt' => [
-                ['src' => 'https://ecovinyl.pt/wp-content/uploads/2017/11/Ecovinyl011-1920x1200.jpg', 'alt' => 'Ecovinyl - trabalho aplicado em fachada'],
-                ['src' => 'https://ecovinyl.pt/wp-content/uploads/2017/11/Ecovinyl033-1920x1200.jpg', 'alt' => 'Ecovinyl - projeto de branding exterior'],
-                ['src' => 'https://ecovinyl.pt/wp-content/uploads/2017/11/Ecovinyl016.jpg', 'alt' => 'Ecovinyl - instalação profissional em vinil'],
-                ['src' => 'https://ecovinyl.pt/wp-content/uploads/2017/11/Ecovinyl024.jpg', 'alt' => 'Ecovinyl - detalhe de acabamento e aplicação'],
-                ['src' => 'https://ecovinyl.pt/wp-content/uploads/2018/03/Acrilicos.jpg', 'alt' => 'Ecovinyl - peças em acrílico e sinalética'],
-                ['src' => 'https://ecovinyl.pt/wp-content/uploads/2018/03/placas.jpg', 'alt' => 'Ecovinyl - placas e comunicação visual'],
-            ],
-            default => [],
-        });
+        return collect(config('frontend_content.project_gallery_fallbacks.'.$this->slug, []));
     }
 
     public function previewCoverUrl(): ?string

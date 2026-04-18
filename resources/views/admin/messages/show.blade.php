@@ -19,9 +19,37 @@
                 <dd class="font-semibold">{{ $message->company ?: '—' }}</dd>
             </div>
             <div>
+                <dt class="text-slate-500">Tipo</dt>
+                <dd class="font-semibold">{{ $message->typeLabel() }}</dd>
+            </div>
+            <div>
                 <dt class="text-slate-500">Data</dt>
                 <dd class="font-semibold">{{ $message->created_at?->format('d/m/Y H:i') }}</dd>
             </div>
+            @if ($message->phone)
+                <div>
+                    <dt class="text-slate-500">Telefone</dt>
+                    <dd class="font-semibold">{{ $message->phone }}</dd>
+                </div>
+            @endif
+            @if ($message->project_type)
+                <div>
+                    <dt class="text-slate-500">Tipo de projeto</dt>
+                    <dd class="font-semibold">{{ $message->projectTypeLabel() }}</dd>
+                </div>
+            @endif
+            @if ($message->budget_range)
+                <div>
+                    <dt class="text-slate-500">Faixa de investimento</dt>
+                    <dd class="font-semibold">{{ $message->budgetRangeLabel() }}</dd>
+                </div>
+            @endif
+            @if ($message->timeline)
+                <div>
+                    <dt class="text-slate-500">Prazo</dt>
+                    <dd class="font-semibold">{{ $message->timelineLabel() }}</dd>
+                </div>
+            @endif
         </dl>
 
         <hr class="my-4 border-slate-200 dark:border-slate-800">

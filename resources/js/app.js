@@ -39,9 +39,27 @@ Alpine.data('themeSwitcher', () => ({
 Alpine.start();
 
 document.addEventListener('DOMContentLoaded', () => {
+    window.dataLayer = window.dataLayer || [];
+    window.dataLayer.push({
+        event: 'page_viewed',
+        path: window.location.pathname,
+        title: document.title,
+    });
+
     document.addEventListener('click', (event) => {
         const upButton = event.target.closest('[data-step-up]');
         const downButton = event.target.closest('[data-step-down]');
+        const analyticsTarget = event.target.closest('[data-analytics-event]');
+
+        if (analyticsTarget) {
+            window.dataLayer.push({
+                event: analyticsTarget.dataset.analyticsEvent,
+                context: analyticsTarget.dataset.analyticsContext || null,
+                label: analyticsTarget.dataset.analyticsLabel || null,
+                href: analyticsTarget.getAttribute('href') || null,
+                path: window.location.pathname,
+            });
+        }
 
         if (!upButton && !downButton) {
             return;
@@ -62,6 +80,21 @@ document.addEventListener('DOMContentLoaded', () => {
 
         input.dispatchEvent(new Event('input', { bubbles: true }));
         input.dispatchEvent(new Event('change', { bubbles: true }));
+    });
+
+    document.addEventListener('submit', (event) => {
+        const form = event.target;
+
+        if (!(form instanceof HTMLFormElement)) {
+            return;
+        }
+
+        window.dataLayer.push({
+            event: 'form_submitted',
+            form_action: form.getAttribute('action'),
+            form_id: form.getAttribute('id') || null,
+            path: window.location.pathname,
+        });
     });
 
     const targets = document.querySelectorAll('[data-reveal]');

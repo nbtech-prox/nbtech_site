@@ -7,6 +7,12 @@
     <div class="mb-4 flex flex-wrap items-center justify-between gap-3">
         <form method="GET" class="flex w-full flex-col gap-2 sm:w-auto sm:flex-row">
             <input type="text" name="q" value="{{ $search }}" placeholder="Pesquisar por número, título ou cliente" class="w-full rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm sm:w-80 dark:border-slate-700 dark:bg-slate-900">
+            <select name="status" class="w-full rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm sm:w-52 dark:border-slate-700 dark:bg-slate-900">
+                <option value="">Todos os estados</option>
+                @foreach ($statuses as $statusKey => $statusLabel)
+                    <option value="{{ $statusKey }}" @selected(($selectedStatus ?? '') === $statusKey)>{{ $statusLabel }}</option>
+                @endforeach
+            </select>
             <button class="btn-secondary w-full sm:w-auto" type="submit">Pesquisar</button>
         </form>
         <a href="{{ route('admin.quotes.create') }}" class="btn-primary w-full sm:w-auto">Novo orçamento</a>

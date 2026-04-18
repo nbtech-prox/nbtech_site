@@ -1,13 +1,22 @@
 @extends('layouts.admin')
 
 @section('title', 'Mensagens | NBTech Admin')
-@section('heading', 'Mensagens de contacto')
+@section('heading', 'Mensagens e pedidos')
 
 @section('content')
     <div class="mb-4">
-        <form method="GET" class="flex gap-2">
+        <form method="GET" class="flex flex-wrap gap-2">
             <input type="text" name="q" value="{{ $search }}" placeholder="Pesquisar por nome ou email" class="rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm dark:border-slate-700 dark:bg-slate-900">
+            <select name="type" class="rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm dark:border-slate-700 dark:bg-slate-900">
+                <option value="">Todos os tipos</option>
+                @foreach ($types as $typeKey => $typeLabel)
+                    <option value="{{ $typeKey }}" @selected(($selectedType ?? '') === $typeKey)>{{ $typeLabel }}</option>
+                @endforeach
+            </select>
             <button class="btn-secondary" type="submit">Pesquisar</button>
+            @if ($search !== '' || ($selectedType ?? '') !== '')
+                <a href="{{ route('admin.messages.index') }}" class="btn-secondary">Limpar</a>
+            @endif
         </form>
     </div>
 
@@ -17,6 +26,7 @@
                 <tr>
                     <th class="px-4 py-3">Nome</th>
                     <th class="px-4 py-3">Email</th>
+                    <th class="px-4 py-3">Tipo</th>
                     <th class="px-4 py-3">Empresa</th>
                     <th class="px-4 py-3 text-center">Data</th>
                     <th class="px-4 py-3 text-center">Ações</th>
@@ -27,6 +37,11 @@
                     <tr class="border-b border-slate-100 dark:border-slate-900">
                         <td class="px-4 py-3">{{ $message->name }}</td>
                         <td class="px-4 py-3">{{ $message->email }}</td>
+                        <td class="px-4 py-3">
+                            <span class="rounded-full px-2.5 py-1 text-xs font-semibold {{ $message->type === \App\Support\ContactMessageTypes::BUDGET ? 'bg-brand-100 text-brand-800 dark:bg-brand-900/40 dark:text-brand-300' : 'bg-slate-100 text-slate-700 dark:bg-slate-800 dark:text-slate-200' }}">
+                                {{ $message->typeLabel() }}
+                            </span>
+                        </td>
                         <td class="px-4 py-3">{{ $message->company ?: '—' }}</td>
                         <td class="px-4 py-3 text-center">{{ $message->created_at?->format('d/m/Y H:i') }}</td>
                         <td class="px-4 py-3 text-center">

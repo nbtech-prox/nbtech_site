@@ -2,6 +2,8 @@
 
 namespace App\DTOs;
 
+use App\Support\TestimonialStatuses;
+
 class TestimonialData
 {
     public function __construct(
@@ -21,7 +23,7 @@ class TestimonialData
             companyUrl: $payload['company_url'] ?? null,
             quote: $payload['quote'],
             rating: (int) ($payload['rating'] ?? 5),
-            status: $payload['status'] ?? 'approved',
+            status: $payload['status'] ?? TestimonialStatuses::APPROVED,
         );
     }
 

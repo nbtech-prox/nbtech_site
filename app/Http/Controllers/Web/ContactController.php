@@ -19,6 +19,6 @@ class ContactController extends Controller
     {
         $service->createMessage($request->validated());
 
-        return back()->with('status', 'Mensagem enviada com sucesso. Obrigado pelo contacto.');
+        return back()->with('status', 'Pedido recebido com sucesso. A NBTech vai analisar o contexto enviado e responder com proximos passos claros.');
     }
 }
