@@ -2,7 +2,7 @@
 
 ## Requisitos
 - PHP 8.4+
-- MariaDB 10.6+
+- PostgreSQL 16+
 - Nginx
 - Redis Server
 - Node.js 20+
