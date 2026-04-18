@@ -6,7 +6,7 @@ Site institucional + painel admin da NBTech, construído com Laravel 12 e Vite.
 
 - Laravel 12 (PHP 8.3)
 - Blade + Tailwind CSS + Vite
-- MySQL
+- PostgreSQL
 - DomPDF para documentos (orçamentos, proforma, fatura/recibo)
 
 ## Funcionalidades principais
@@ -31,6 +31,7 @@ composer install
 npm install
 cp .env.example .env
 php artisan key:generate
+createdb -h 127.0.0.1 -U postgres nbtech
 php artisan migrate
 npm run dev
 php artisan serve
@@ -39,6 +40,7 @@ php artisan serve
 ## Testes
 
 ```bash
+createdb -h 127.0.0.1 -U postgres nbtech_test
 php artisan test
 ```
 
