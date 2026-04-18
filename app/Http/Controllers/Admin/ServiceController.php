@@ -11,6 +11,8 @@ use App\Repositories\ServiceRepository;
 use App\Services\ServiceService;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\View\View;
 
 class ServiceController extends Controller
@@ -30,7 +32,13 @@ class ServiceController extends Controller
 
     public function store(StoreServiceRequest $request, ServiceService $serviceService): RedirectResponse
     {
-        $service = $serviceService->create(ServiceData::fromArray($request->validated()));
+        $payload = $request->validated();
+
+        if ($request->hasFile('image_file')) {
+            $payload['image_url'] = $this->storeServiceImage($request->file('image_file'));
+        }
+
+        $service = $serviceService->create(ServiceData::fromArray($payload));
 
         return redirect()->route('admin.services.edit', $service)
             ->with('status', 'Serviço criado com sucesso.');
@@ -43,16 +51,51 @@ class ServiceController extends Controller
 
     public function update(UpdateServiceRequest $request, Service $service, ServiceService $serviceService): RedirectResponse
     {
-        $serviceService->update($service, ServiceData::fromArray($request->validated()));
+        $payload = $request->validated();
+
+        if ($request->boolean('remove_image')) {
+            $this->deleteManagedImage($service->image_url);
+            $payload['image_url'] = null;
+        }
+
+        if ($request->hasFile('image_file')) {
+            $this->deleteManagedImage($service->image_url);
+            $payload['image_url'] = $this->storeServiceImage($request->file('image_file'));
+        }
+
+        $serviceService->update($service, ServiceData::fromArray($payload));
 
         return back()->with('status', 'Serviço atualizado com sucesso.');
     }
 
     public function destroy(Service $service, ServiceService $serviceService): RedirectResponse
     {
+        $this->deleteManagedImage($service->image_url);
         $serviceService->delete($service);
 
         return redirect()->route('admin.services.index')
             ->with('status', 'Serviço removido com sucesso.');
+    }
+
+    private function storeServiceImage(UploadedFile $file): string
+    {
+        $path = $file->store('services', 'public');
+
+        return '/storage/'.$path;
+    }
+
+    private function deleteManagedImage(?string $url): void
+    {
+        if (! $url) {
+            return;
+        }
+
+        $path = parse_url($url, PHP_URL_PATH) ?: $url;
+
+        if (! is_string($path) || ! str_starts_with($path, '/storage/services/')) {
+            return;
+        }
+
+        Storage::disk('public')->delete(ltrim(str_replace('/storage/', '', $path), '/'));
     }
 }

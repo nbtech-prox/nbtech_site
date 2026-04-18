@@ -11,8 +11,21 @@
 
         <div class="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
             @foreach ($projects as $project)
+                @php
+                    $coverUrl = $project->previewCoverUrl();
+                    $coverHost = $coverUrl ? parse_url($coverUrl, PHP_URL_HOST) : null;
+                    $coverPath = $coverUrl ? parse_url($coverUrl, PHP_URL_PATH) : null;
+                    $resolvedCover = in_array($coverHost, ['localhost', '127.0.0.1'], true) && $coverPath
+                        ? $coverPath
+                        : $coverUrl;
+                    $imageSrc = $resolvedCover ?: 'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=1200&q=80';
+                    $mediaVersion = $project->getFirstMedia('cover')?->updated_at?->timestamp
+                        ?? $project->updated_at?->timestamp
+                        ?? now()->timestamp;
+                    $imageSrcVersioned = $imageSrc.(str_contains($imageSrc, '?') ? '&' : '?').'v='.$mediaVersion;
+                @endphp
                 <article class="group relative overflow-hidden rounded-lg border border-[#b8c1cf] bg-[#0a0e15] text-white dark:border-[#4e576a] dark:bg-[#212631]" data-reveal>
-                    <img src="{{ $project->getFirstMediaUrl('cover') ?: 'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=1200&q=80' }}" alt="{{ $project->title }}" class="h-72 w-full object-cover transition duration-500 group-hover:scale-105" loading="lazy">
+                    <img src="{{ $imageSrcVersioned }}" alt="{{ $project->title }}" class="h-72 w-full object-cover transition duration-500 group-hover:scale-105" loading="lazy">
                     <div class="absolute inset-0 bg-[#0a0e15]/72 opacity-95 transition group-hover:opacity-100"></div>
                     <div class="absolute inset-x-0 bottom-0 p-5">
                         <h2 class="text-xl font-semibold">{{ $project->title }}</h2>

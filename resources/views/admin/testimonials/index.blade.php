@@ -5,20 +5,20 @@
 
 @section('content')
     <div class="mb-4 flex flex-wrap items-center justify-between gap-3">
-        <form method="GET" class="flex flex-wrap gap-2">
-            <input type="text" name="q" value="{{ $search }}" placeholder="Pesquisar testemunho" class="rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm dark:border-slate-700 dark:bg-slate-900">
-            <select name="status" class="rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm dark:border-slate-700 dark:bg-slate-900">
+        <form method="GET" class="flex w-full flex-col gap-2 sm:w-auto sm:flex-row sm:flex-wrap">
+            <input type="text" name="q" value="{{ $search }}" placeholder="Pesquisar testemunho" class="w-full rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm sm:w-64 dark:border-slate-700 dark:bg-slate-900">
+            <select name="status" class="w-full rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm sm:w-44 dark:border-slate-700 dark:bg-slate-900">
                 <option value="">Todos os estados</option>
                 @foreach ($statuses as $statusKey => $statusLabel)
                     <option value="{{ $statusKey }}" @selected($selectedStatus === $statusKey)>{{ $statusLabel }}</option>
                 @endforeach
             </select>
-            <button class="btn-secondary" type="submit">Pesquisar</button>
+            <button class="btn-secondary w-full sm:w-auto" type="submit">Pesquisar</button>
             @if ($search !== '' || $selectedStatus !== '')
-                <a href="{{ route('admin.testimonials.index') }}" class="btn-secondary">Limpar</a>
+                <a href="{{ route('admin.testimonials.index') }}" class="btn-secondary w-full sm:w-auto">Limpar</a>
             @endif
         </form>
-        <a href="{{ route('admin.testimonials.create') }}" class="btn-primary">Novo testemunho</a>
+        <a href="{{ route('admin.testimonials.create') }}" class="btn-primary w-full sm:w-auto">Novo testemunho</a>
     </div>
 
     <div class="panel overflow-x-auto">
