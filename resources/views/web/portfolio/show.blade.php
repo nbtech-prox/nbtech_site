@@ -33,13 +33,38 @@
     <section class="container-fluid py-20">
         <a href="{{ route('portfolio.index') }}" class="mb-6 inline-flex text-sm font-semibold text-brand-600">← Voltar ao portfólio</a>
 
-        <div class="mb-8 max-w-4xl" data-reveal>
+        <div class="mb-10 grid gap-8 lg:grid-cols-[1.1fr_0.9fr] lg:items-end" data-reveal>
+            <div class="max-w-4xl">
             <p class="text-xs font-semibold uppercase tracking-widest text-brand-600">{{ $project->category }}</p>
-            <h1 class="font-display text-7xl leading-none">{{ $project->title }}</h1>
+            <h1 class="font-display text-2xl leading-[1.02] sm:text-3xl md:text-4xl xl:text-[2.35rem]">{{ $project->title }}</h1>
             <p class="mt-4 text-lg text-[#4e576a] dark:text-[#e0e4eb]">{{ $project->description }}</p>
             @if ($project->project_url)
                 <a href="{{ $project->project_url }}" target="_blank" rel="noopener" class="btn-primary mt-5">Visitar projeto</a>
             @endif
+            </div>
+            <article class="rounded-[1.8rem] border border-[#cad4e3] bg-white/90 p-6 shadow-[0_30px_80px_-50px_rgba(15,23,42,0.4)] dark:border-[#2f3b4d] dark:bg-[#111823]">
+                <p class="text-[11px] font-semibold uppercase tracking-[0.16em] text-brand-600">Leitura estratégica</p>
+                <p class="mt-4 text-sm leading-7 text-[#4e576a] dark:text-[#dce3ee]">Este caso existe para mostrar como uma direção técnica e visual bem resolvida pode tornar a presença digital mais clara, mais credível e mais útil para o negócio.</p>
+            </article>
+        </div>
+
+        <div class="mb-8 grid gap-4 lg:grid-cols-4" data-reveal>
+            <article class="rounded-2xl border border-[#b8c1cf] bg-white/85 p-5 dark:border-[#373f4e] dark:bg-[#101722]">
+                <p class="text-[11px] font-semibold uppercase tracking-[0.16em] text-brand-600">Categoria</p>
+                <p class="mt-3 text-sm font-medium text-zinc-900 dark:text-[#f3ede4]">{{ $project->category }}</p>
+            </article>
+            <article class="rounded-2xl border border-[#b8c1cf] bg-white/85 p-5 dark:border-[#373f4e] dark:bg-[#101722]">
+                <p class="text-[11px] font-semibold uppercase tracking-[0.16em] text-brand-600">Abordagem</p>
+                <p class="mt-3 text-sm font-medium text-zinc-900 dark:text-[#f3ede4]">Clareza, performance e base escalavel</p>
+            </article>
+            <article class="rounded-2xl border border-[#b8c1cf] bg-white/85 p-5 dark:border-[#373f4e] dark:bg-[#101722]">
+                <p class="text-[11px] font-semibold uppercase tracking-[0.16em] text-brand-600">Stack</p>
+                <p class="mt-3 text-sm font-medium text-zinc-900 dark:text-[#f3ede4]">{{ collect($project->technologies ?? [])->take(3)->implode(' / ') ?: 'Tecnologia a medida' }}</p>
+            </article>
+            <article class="rounded-2xl border border-[#b8c1cf] bg-white/85 p-5 dark:border-[#373f4e] dark:bg-[#101722]">
+                <p class="text-[11px] font-semibold uppercase tracking-[0.16em] text-brand-600">Objetivo</p>
+                <p class="mt-3 text-sm font-medium text-zinc-900 dark:text-[#f3ede4]">Entregar uma experiencia digital mais forte e mais util</p>
+            </article>
         </div>
 
         @if ($coverSrc)
@@ -98,12 +123,46 @@
             </div>
         @endif
 
-        <div class="mt-10 panel p-6" data-reveal>
+        <div class="mt-10 rounded-[1.8rem] border border-[#cad4e3] bg-white/90 p-6 dark:border-[#2f3b4d] dark:bg-[#111823]" data-reveal>
             <h2 class="mb-4 text-xl font-semibold">Tecnologias utilizadas</h2>
             <div class="flex flex-wrap gap-2">
                 @foreach ($project->technologies ?? [] as $technology)
                     <span class="rounded-full bg-brand-100 px-3 py-1 text-xs font-semibold text-brand-800 dark:bg-brand-900/40 dark:text-brand-300">{{ $technology }}</span>
                 @endforeach
+            </div>
+        </div>
+
+        <div class="mt-8 grid gap-5 lg:grid-cols-2" data-reveal>
+            <article class="rounded-[1.8rem] border border-[#cad4e3] bg-white/90 p-6 dark:border-[#2f3b4d] dark:bg-[#111823] md:p-8">
+                <p class="text-[11px] font-semibold uppercase tracking-[0.16em] text-brand-600">Leitura rapida</p>
+                <h2 class="mt-3 font-display text-2xl leading-[1.02] sm:text-3xl xl:text-[2.15rem]">O que este projeto demonstra</h2>
+                <ul class="mt-5 space-y-3 text-sm text-[#4e576a] dark:text-[#e0e4eb]">
+                    <li class="rounded-xl border border-[#c8d0dd] bg-white px-4 py-3 dark:border-[#334053] dark:bg-[#171e2a]">Capacidade de transformar necessidade em estrutura digital concreta</li>
+                    <li class="rounded-xl border border-[#c8d0dd] bg-white px-4 py-3 dark:border-[#334053] dark:bg-[#171e2a]">Atencao a identidade, experiencia e consistencia tecnica</li>
+                    <li class="rounded-xl border border-[#c8d0dd] bg-white px-4 py-3 dark:border-[#334053] dark:bg-[#171e2a]">Execucao pensada para evoluir e nao apenas para "entregar e sair"</li>
+                </ul>
+            </article>
+            <article class="rounded-[1.8rem] border border-[#cad4e3] bg-white/90 p-6 dark:border-[#2f3b4d] dark:bg-[#111823] md:p-8">
+                <p class="text-[11px] font-semibold uppercase tracking-[0.16em] text-brand-600">Aplicacao pratica</p>
+                <h2 class="mt-3 font-display text-2xl leading-[1.02] sm:text-3xl xl:text-[2.15rem]">Se tens um desafio parecido</h2>
+                <p class="mt-4 text-sm text-[#4e576a] dark:text-[#e0e4eb]">Podemos ajudar-te a estruturar o projeto, identificar a prioridade certa e definir uma execucao com mais impacto desde o inicio.</p>
+                <a href="{{ route('budget.index') }}" class="btn-primary mt-5">Falar sobre o meu projeto</a>
+            </article>
+        </div>
+
+        <div class="mt-10 rounded-[2rem] border border-[#cad4e3] bg-white/90 p-7 dark:border-[#2f3b4d] dark:bg-[#111823] md:p-10" data-reveal>
+            <div class="grid gap-6 lg:grid-cols-[1.05fr_0.95fr] lg:items-end">
+                <div>
+                    <span class="chip-brand">Próximo passo</span>
+                    <h2 class="mt-4 font-display text-2xl leading-[1.02] sm:text-3xl xl:text-[2.15rem]">Se tens um desafio parecido, o melhor ponto de partida é uma conversa com direção.</h2>
+                </div>
+                <div class="space-y-4">
+                    <p class="text-sm leading-7 text-[#4e576a] dark:text-[#dce3ee]">Podemos ajudar-te a clarificar objetivo, prioridade e abordagem antes da execução, para avançares com menos ruído e mais impacto.</p>
+                    <div class="flex flex-wrap items-center gap-4">
+                        <a href="{{ route('budget.index') }}" class="btn-primary">Pedir orcamento</a>
+                        <a href="{{ route('contact.index') }}" class="btn-secondary">Falar connosco</a>
+                    </div>
+                </div>
             </div>
         </div>
     </section>

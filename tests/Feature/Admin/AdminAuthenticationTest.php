@@ -15,4 +15,14 @@ class AdminAuthenticationTest extends TestCase
 
         $response->assertRedirect(route('login'));
     }
+
+    public function test_login_page_contains_password_visibility_toggle(): void
+    {
+        $response = $this->get(route('login'));
+
+        $response->assertOk();
+        $response->assertSee('id="password"', false);
+        $response->assertSee('data-password-toggle', false);
+        $response->assertSee('aria-label="Mostrar password"', false);
+    }
 }

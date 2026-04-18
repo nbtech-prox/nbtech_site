@@ -18,9 +18,12 @@ class ServiceFactory extends Factory
     {
         return [
             'title' => fake()->unique()->words(2, true),
+            'slug' => fake()->unique()->slug(2),
             'description' => fake()->sentence(12),
             'icon' => fake()->randomElement(['globe', 'app-window', 'smartphone', 'zap']),
             'order' => fake()->numberBetween(1, 20),
+            'meta_title' => fake()->sentence(4),
+            'meta_description' => fake()->sentence(12),
         ];
     }
 }

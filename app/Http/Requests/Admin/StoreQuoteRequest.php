@@ -2,8 +2,10 @@
 
 namespace App\Http\Requests\Admin;
 
-use Illuminate\Support\Carbon;
+use App\Support\QuoteDocumentTypes;
+use App\Support\QuoteStatuses;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Carbon;
 
 class StoreQuoteRequest extends FormRequest
 {
@@ -19,10 +21,10 @@ class StoreQuoteRequest extends FormRequest
     {
         return [
             'title' => ['required', 'string', 'max:160'],
-            'status' => ['required', 'string', 'in:draft,emitted,paid,cancelled'],
-            'document_type' => ['required', 'string', 'in:proforma,fatura-recibo'],
+            'status' => ['required', 'string', 'in:'.implode(',', QuoteStatuses::values())],
+            'document_type' => ['required', 'string', 'in:'.implode(',', QuoteDocumentTypes::values())],
             'issue_date' => ['required', 'date'],
-            'due_date' => ['nullable', 'date', 'after_or_equal:issue_date', 'required_if:document_type,proforma'],
+            'due_date' => ['nullable', 'date', 'after_or_equal:issue_date', 'required_if:document_type,'.QuoteDocumentTypes::PROFORMA],
             'client_name' => ['required', 'string', 'max:160'],
             'client_email' => ['nullable', 'email', 'max:160'],
             'client_phone' => ['nullable', 'string', 'max:40'],

@@ -19,6 +19,8 @@ class ProjectController extends Controller
 {
     public function index(Request $request, ProjectRepository $projects): View
     {
+        $this->authorize('viewAny', Project::class);
+
         return view('admin.projects.index', [
             'projects' => $projects->paginateForAdmin(
                 search: $request->string('q')->toString() ?: null,
@@ -33,11 +35,15 @@ class ProjectController extends Controller
 
     public function create(): View
     {
+        $this->authorize('create', Project::class);
+
         return view('admin.projects.create');
     }
 
     public function store(StoreProjectRequest $request, CreateProject $action): RedirectResponse
     {
+        $this->authorize('create', Project::class);
+
         $data = ProjectData::fromArray($request->validated());
 
         $project = $action->handle(
@@ -53,6 +59,8 @@ class ProjectController extends Controller
 
     public function edit(Project $project): View
     {
+        $this->authorize('update', $project);
+
         return view('admin.projects.edit', [
             'project' => $project,
         ]);
@@ -60,6 +68,8 @@ class ProjectController extends Controller
 
     public function update(UpdateProjectRequest $request, Project $project, UpdateProject $action): RedirectResponse
     {
+        $this->authorize('update', $project);
+
         $data = ProjectData::fromArray($request->validated());
 
         $action->handle(
@@ -75,6 +85,8 @@ class ProjectController extends Controller
 
     public function destroy(Project $project, DeleteProject $action): RedirectResponse
     {
+        $this->authorize('delete', $project);
+
         $action->handle($project);
 
         return redirect()->route('admin.projects.index')

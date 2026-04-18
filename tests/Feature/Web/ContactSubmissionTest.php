@@ -26,6 +26,7 @@ class ContactSubmissionTest extends TestCase
         $this->assertDatabaseHas('contact_messages', [
             'email' => 'rita@empresa.pt',
             'name' => 'Rita Silva',
+            'type' => 'contact',
         ]);
     }
 }

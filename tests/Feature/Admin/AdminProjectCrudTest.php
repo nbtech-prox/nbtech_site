@@ -12,6 +12,31 @@ class AdminProjectCrudTest extends TestCase
 {
     use RefreshDatabase;
 
+    public function test_admin_project_slug_is_normalized_from_input(): void
+    {
+        Role::findOrCreate('admin');
+
+        $admin = User::factory()->create();
+        $admin->assignRole('admin');
+
+        $response = $this->actingAs($admin)->post(route('admin.projects.store'), [
+            'title' => 'Projeto Teste',
+            'slug' => 'Projeto Teste Premium',
+            'description' => 'Descrição de teste do projeto.',
+            'technologies' => 'Laravel, TailwindCSS, AlpineJS',
+            'project_url' => 'https://example.com',
+            'category' => 'Web App',
+            'featured' => '1',
+            'published' => '1',
+        ]);
+
+        $project = Project::query()->where('title', 'Projeto Teste')->first();
+
+        $this->assertNotNull($project);
+        $response->assertRedirect(route('admin.projects.edit', $project));
+        $this->assertSame('projeto-teste-premium', $project->slug);
+    }
+
     public function test_admin_can_create_update_and_delete_project(): void
     {
         Role::findOrCreate('admin');

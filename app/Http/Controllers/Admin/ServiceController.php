@@ -8,7 +8,6 @@ use App\Http\Requests\Admin\StoreServiceRequest;
 use App\Http\Requests\Admin\UpdateServiceRequest;
 use App\Models\Service;
 use App\Repositories\ServiceRepository;
-use App\Services\ServiceService;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\UploadedFile;
@@ -19,6 +18,8 @@ class ServiceController extends Controller
 {
     public function index(Request $request, ServiceRepository $services): View
     {
+        $this->authorize('viewAny', Service::class);
+
         return view('admin.services.index', [
             'services' => $services->paginateForAdmin($request->string('q')->toString() ?: null),
             'search' => $request->string('q')->toString(),
@@ -27,18 +28,22 @@ class ServiceController extends Controller
 
     public function create(): View
     {
+        $this->authorize('create', Service::class);
+
         return view('admin.services.create');
     }
 
-    public function store(StoreServiceRequest $request, ServiceService $serviceService): RedirectResponse
+    public function store(StoreServiceRequest $request, ServiceRepository $services): RedirectResponse
     {
+        $this->authorize('create', Service::class);
+
         $payload = $request->validated();
 
         if ($request->hasFile('image_file')) {
             $payload['image_url'] = $this->storeServiceImage($request->file('image_file'));
         }
 
-        $service = $serviceService->create(ServiceData::fromArray($payload));
+        $service = $services->create(ServiceData::fromArray($payload)->toArray());
 
         return redirect()->route('admin.services.edit', $service)
             ->with('status', 'Serviço criado com sucesso.');
@@ -46,11 +51,15 @@ class ServiceController extends Controller
 
     public function edit(Service $service): View
     {
+        $this->authorize('update', $service);
+
         return view('admin.services.edit', ['service' => $service]);
     }
 
-    public function update(UpdateServiceRequest $request, Service $service, ServiceService $serviceService): RedirectResponse
+    public function update(UpdateServiceRequest $request, Service $service, ServiceRepository $services): RedirectResponse
     {
+        $this->authorize('update', $service);
+
         $payload = $request->validated();
 
         if ($request->boolean('remove_image')) {
@@ -63,15 +72,17 @@ class ServiceController extends Controller
             $payload['image_url'] = $this->storeServiceImage($request->file('image_file'));
         }
 
-        $serviceService->update($service, ServiceData::fromArray($payload));
+        $services->update($service, ServiceData::fromArray($payload)->toArray());
 
         return back()->with('status', 'Serviço atualizado com sucesso.');
     }
 
-    public function destroy(Service $service, ServiceService $serviceService): RedirectResponse
+    public function destroy(Service $service, ServiceRepository $services): RedirectResponse
     {
+        $this->authorize('delete', $service);
+
         $this->deleteManagedImage($service->image_url);
-        $serviceService->delete($service);
+        $services->delete($service);
 
         return redirect()->route('admin.services.index')
             ->with('status', 'Serviço removido com sucesso.');

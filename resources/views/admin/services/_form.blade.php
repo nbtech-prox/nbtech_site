@@ -46,6 +46,13 @@
             <p class="mt-1 text-xs text-rose-600 dark:text-rose-400">{{ $message }}</p>
         @enderror
     </div>
+    <div>
+        <label class="mb-1 block text-sm font-medium">Slug</label>
+        <input name="slug" value="{{ old('slug', $service?->slug) }}" placeholder="consultoria-tecnica" @class(['w-full rounded-xl border bg-white px-4 py-2.5 text-sm dark:bg-slate-900', 'border-slate-300 dark:border-slate-700' => !$errors->has('slug'), 'border-rose-400 ring-2 ring-rose-200 dark:border-rose-500 dark:ring-rose-900/40' => $errors->has('slug')]) aria-invalid="{{ $errors->has('slug') ? 'true' : 'false' }}">
+        @error('slug')
+            <p class="mt-1 text-xs text-rose-600 dark:text-rose-400">{{ $message }}</p>
+        @enderror
+    </div>
     <div class="md:col-span-2">
         <label class="mb-1 block text-sm font-medium">URL da imagem do card</label>
         <input name="image_url" value="{{ old('image_url', $service?->image_url) }}" placeholder="https://..." @class(['w-full rounded-xl border bg-white px-4 py-2.5 text-sm dark:bg-slate-900', 'border-slate-300 dark:border-slate-700' => !$errors->has('image_url'), 'border-rose-400 ring-2 ring-rose-200 dark:border-rose-500 dark:ring-rose-900/40' => $errors->has('image_url')]) aria-invalid="{{ $errors->has('image_url') ? 'true' : 'false' }}">
@@ -83,6 +90,22 @@
     @error('description')
         <p class="mt-1 text-xs text-rose-600 dark:text-rose-400">{{ $message }}</p>
     @enderror
+</div>
+<div class="mt-4 grid gap-4 md:grid-cols-2">
+    <div>
+        <label class="mb-1 block text-sm font-medium">Meta title</label>
+        <input name="meta_title" value="{{ old('meta_title', $service?->meta_title) }}" @class(['w-full rounded-xl border bg-white px-4 py-2.5 text-sm dark:bg-slate-900', 'border-slate-300 dark:border-slate-700' => !$errors->has('meta_title'), 'border-rose-400 ring-2 ring-rose-200 dark:border-rose-500 dark:ring-rose-900/40' => $errors->has('meta_title')]) aria-invalid="{{ $errors->has('meta_title') ? 'true' : 'false' }}">
+        @error('meta_title')
+            <p class="mt-1 text-xs text-rose-600 dark:text-rose-400">{{ $message }}</p>
+        @enderror
+    </div>
+    <div>
+        <label class="mb-1 block text-sm font-medium">Meta description</label>
+        <textarea name="meta_description" rows="4" @class(['w-full rounded-xl border bg-white px-4 py-2.5 text-sm dark:bg-slate-900', 'border-slate-300 dark:border-slate-700' => !$errors->has('meta_description'), 'border-rose-400 ring-2 ring-rose-200 dark:border-rose-500 dark:ring-rose-900/40' => $errors->has('meta_description')]) aria-invalid="{{ $errors->has('meta_description') ? 'true' : 'false' }}">{{ old('meta_description', $service?->meta_description) }}</textarea>
+        @error('meta_description')
+            <p class="mt-1 text-xs text-rose-600 dark:text-rose-400">{{ $message }}</p>
+        @enderror
+    </div>
 </div>
 <div class="mt-4">
     <label class="mb-1 block text-sm font-medium">Ordem</label>
