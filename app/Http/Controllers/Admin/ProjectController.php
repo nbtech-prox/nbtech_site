@@ -24,11 +24,9 @@ class ProjectController extends Controller
         return view('admin.projects.index', [
             'projects' => $projects->paginateForAdmin(
                 search: $request->string('q')->toString() ?: null,
-                category: $request->string('category')->toString() ?: null,
             ),
             'filters' => [
                 'q' => $request->string('q')->toString(),
-                'category' => $request->string('category')->toString(),
             ],
         ]);
     }

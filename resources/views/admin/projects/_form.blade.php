@@ -73,13 +73,6 @@
         @enderror
     </div>
     <div>
-        <label class="mb-1 block text-sm font-medium" for="category">Categoria</label>
-        <input id="category" name="category" required value="{{ old('category', $project?->category) }}" @class(['w-full rounded-xl border bg-white px-4 py-2.5 text-sm dark:bg-slate-900', 'border-slate-300 dark:border-slate-700' => !$errors->has('category'), 'border-rose-400 ring-2 ring-rose-200 dark:border-rose-500 dark:ring-rose-900/40' => $errors->has('category')]) aria-invalid="{{ $errors->has('category') ? 'true' : 'false' }}">
-        @error('category')
-            <p class="mt-1 text-xs text-rose-600 dark:text-rose-400">{{ $message }}</p>
-        @enderror
-    </div>
-    <div>
         <label class="mb-1 block text-sm font-medium" for="meta_title">Meta title</label>
         <input id="meta_title" name="meta_title" value="{{ old('meta_title', $project?->meta_title) }}" @class(['w-full rounded-xl border bg-white px-4 py-2.5 text-sm dark:bg-slate-900', 'border-slate-300 dark:border-slate-700' => !$errors->has('meta_title'), 'border-rose-400 ring-2 ring-rose-200 dark:border-rose-500 dark:ring-rose-900/40' => $errors->has('meta_title')]) aria-invalid="{{ $errors->has('meta_title') ? 'true' : 'false' }}">
         @error('meta_title')

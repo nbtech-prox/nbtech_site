@@ -31,7 +31,7 @@ class UpdateProjectRequest extends FormRequest
             'description' => ['required', 'string'],
             'technologies' => ['nullable', 'string'],
             'project_url' => ['nullable', 'url', 'max:255'],
-            'category' => ['required', 'string', 'max:100'],
+            'category' => ['nullable', 'string', 'max:100'],
             'featured' => ['nullable', 'boolean'],
             'published' => ['nullable', 'boolean'],
             'meta_title' => ['nullable', 'string', 'max:170'],

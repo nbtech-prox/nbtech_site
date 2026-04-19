@@ -35,7 +35,9 @@
 
         <div class="mb-10 grid gap-8 lg:grid-cols-[1.1fr_0.9fr] lg:items-end" data-reveal>
             <div class="max-w-4xl">
-            <p class="text-xs font-semibold uppercase tracking-widest text-brand-600">{{ $project->category }}</p>
+            @if ($project->category)
+                <p class="text-xs font-semibold uppercase tracking-widest text-brand-600">{{ $project->category }}</p>
+            @endif
             <h1 class="font-display text-2xl leading-[1.02] sm:text-3xl md:text-4xl xl:text-[2.35rem]">{{ $project->title }}</h1>
             <p class="mt-4 text-lg text-[#4e576a] dark:text-[#e0e4eb]">{{ $project->description }}</p>
             @if ($project->project_url)
@@ -51,7 +53,9 @@
         <div class="mb-8 grid gap-4 lg:grid-cols-4" data-reveal>
             <article class="rounded-2xl border border-[#b8c1cf] bg-white/85 p-5 dark:border-[#373f4e] dark:bg-[#101722]">
                 <p class="text-[11px] font-semibold uppercase tracking-[0.16em] text-brand-600">Categoria</p>
-                <p class="mt-3 text-sm font-medium text-zinc-900 dark:text-[#f3ede4]">{{ $project->category }}</p>
+                @if ($project->category)
+                    <p class="mt-3 text-sm font-medium text-zinc-900 dark:text-[#f3ede4]">{{ $project->category }}</p>
+                @endif
             </article>
             <article class="rounded-2xl border border-[#b8c1cf] bg-white/85 p-5 dark:border-[#373f4e] dark:bg-[#101722]">
                 <p class="text-[11px] font-semibold uppercase tracking-[0.16em] text-brand-600">Abordagem</p>

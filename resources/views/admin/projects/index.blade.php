@@ -7,7 +7,6 @@
     <div class="mb-4 flex flex-wrap items-center justify-between gap-3">
         <form method="GET" class="flex w-full flex-col gap-2 sm:w-auto sm:flex-row">
             <input type="text" name="q" value="{{ $filters['q'] }}" placeholder="Pesquisar" class="w-full rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm sm:w-56 dark:border-slate-700 dark:bg-slate-900">
-            <input type="text" name="category" value="{{ $filters['category'] }}" placeholder="Categoria" class="w-full rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm sm:w-44 dark:border-slate-700 dark:bg-slate-900">
             <button class="btn-secondary w-full sm:w-auto" type="submit">Filtrar</button>
         </form>
         <a href="{{ route('admin.projects.create') }}" class="btn-primary w-full sm:w-auto">Novo projeto</a>
@@ -18,7 +17,6 @@
             <thead class="border-b border-slate-200 text-left dark:border-slate-800">
                 <tr>
                     <th class="px-4 py-3">Título</th>
-                    <th class="px-4 py-3">Categoria</th>
                     <th class="px-4 py-3 text-center">Estado</th>
                     <th class="px-4 py-3 text-center">Ações</th>
                 </tr>
@@ -27,7 +25,6 @@
                 @foreach ($projects as $project)
                     <tr class="border-b border-slate-100 dark:border-slate-900">
                         <td class="px-4 py-3">{{ $project->title }}</td>
-                        <td class="px-4 py-3">{{ $project->category }}</td>
                         <td class="px-4 py-3 text-center">{{ $project->published ? 'Publicado' : 'Rascunho' }}</td>
                         <td class="px-4 py-3 text-center">
                             <div class="flex items-center justify-center gap-4">
