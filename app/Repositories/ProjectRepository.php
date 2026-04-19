@@ -7,14 +7,13 @@ use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 
 class ProjectRepository
 {
-    public function paginateForAdmin(?string $search = null, ?string $category = null): LengthAwarePaginator
+    public function paginateForAdmin(?string $search = null): LengthAwarePaginator
     {
         return Project::query()
             ->when($search, fn ($query) => $query->where(function ($inner) use ($search): void {
                 $inner->where('title', 'like', "%{$search}%")
                     ->orWhere('description', 'like', "%{$search}%");
             }))
-            ->when($category, fn ($query) => $query->where('category', $category))
             ->latest()
             ->paginate(12)
             ->withQueryString();

@@ -25,7 +25,6 @@ class AdminProjectCrudTest extends TestCase
             'description' => 'Descrição de teste do projeto.',
             'technologies' => 'Laravel, TailwindCSS, AlpineJS',
             'project_url' => 'https://example.com',
-            'category' => 'Web App',
             'featured' => '1',
             'published' => '1',
         ]);
@@ -35,6 +34,7 @@ class AdminProjectCrudTest extends TestCase
         $this->assertNotNull($project);
         $response->assertRedirect(route('admin.projects.edit', $project));
         $this->assertSame('projeto-teste-premium', $project->slug);
+        $this->assertNull($project->category);
     }
 
     public function test_admin_can_create_update_and_delete_project(): void
@@ -50,7 +50,6 @@ class AdminProjectCrudTest extends TestCase
             'description' => 'Descrição de teste do projeto.',
             'technologies' => 'Laravel, TailwindCSS, AlpineJS',
             'project_url' => 'https://example.com',
-            'category' => 'Web App',
             'featured' => '1',
             'published' => '1',
             'meta_title' => 'Projeto Teste',
@@ -76,6 +75,7 @@ class AdminProjectCrudTest extends TestCase
             'id' => $project->id,
             'title' => 'Projeto Teste Atualizado',
             'slug' => 'projeto-teste-atualizado',
+            'category' => null,
         ]);
 
         $project = $project->fresh();

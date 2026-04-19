@@ -25,6 +25,11 @@ CACHE_STORE=redis
 REDIS_CLIENT=predis
 ```
 
+## Uploads de imagens
+- Se o admin devolver `413 Request Entity Too Large`, o bloqueio está no Nginx/reverse proxy antes de o Laravel validar o request.
+- Em ambientes com Nginx ou Dokploy, aumentar o limite do proxy para suportar uploads de capa, galeria e imagem OpenGraph no formulário de projetos.
+- Recomenda-se também alinhar `upload_max_filesize` e `post_max_size` no PHP-FPM com um valor igual ou superior ao do proxy.
+
 ## Worker de filas
 ```bash
 php artisan queue:work --queue=default --sleep=1 --tries=3
@@ -39,6 +44,7 @@ server {
     server_name nbtech.pt www.nbtech.pt;
     root /var/www/nbtech/public;
     index index.php;
+    client_max_body_size 20M;
 
     add_header X-Frame-Options "SAMEORIGIN";
     add_header X-Content-Type-Options "nosniff";

@@ -55,7 +55,9 @@
                     <img src="{{ $imageSrcVersioned }}" alt="{{ $project->title }}" class="h-72 w-full object-cover transition duration-500 group-hover:scale-105" loading="lazy">
                     <div class="absolute inset-0 bg-[#0a0e15]/72 opacity-95 transition group-hover:opacity-100"></div>
                     <div class="absolute inset-x-0 bottom-0 p-5">
-                        <p class="mb-2 text-[11px] font-semibold uppercase tracking-[0.16em] text-brand-300">{{ $project->category }}</p>
+                        @if ($project->category)
+                            <p class="mb-2 text-[11px] font-semibold uppercase tracking-[0.16em] text-brand-300">{{ $project->category }}</p>
+                        @endif
                         <h2 class="text-xl font-semibold">{{ $project->title }}</h2>
                         <p class="mt-1 text-xs text-zinc-200">{{ implode(' · ', $project->technologies ?? []) }}</p>
                         <a href="{{ route('portfolio.show', $project) }}" class="mt-3 inline-flex rounded-lg bg-white/15 px-3 py-1.5 text-xs font-semibold transition hover:bg-white/25">Abrir caso</a>
