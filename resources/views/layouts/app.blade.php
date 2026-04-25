@@ -99,6 +99,9 @@
                             <a href="{{ route('services.index') }}" class="hover:text-brand-600">Serviços</a>
                             <a href="{{ route('portfolio.index') }}" class="hover:text-brand-600">Portfólio</a>
                             <a href="{{ route('about') }}" class="hover:text-brand-600">Sobre</a>
+                            <a href="{{ route('legal.privacy') }}" class="hover:text-brand-600">Política de Privacidade</a>
+                            <a href="{{ route('legal.cookies') }}" class="hover:text-brand-600">Política de Cookies</a>
+                            <a href="{{ route('legal.terms') }}" class="hover:text-brand-600">Termos e Condições</a>
                         </div>
                     </div>
                     <div class="space-y-3">

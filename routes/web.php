@@ -26,6 +26,9 @@ Route::get('/orcamento', [BudgetRequestController::class, 'index'])->name('budge
 Route::post('/orcamento', [BudgetRequestController::class, 'store'])->middleware('throttle:public-submissions')->name('budget.store');
 Route::get('/contacto', [ContactController::class, 'index'])->name('contact.index');
 Route::post('/contacto', [ContactController::class, 'store'])->middleware('throttle:public-submissions')->name('contact.store');
+Route::view('/politica-de-privacidade', 'web.privacy-policy')->name('legal.privacy');
+Route::view('/politica-de-cookies', 'web.cookie-policy')->name('legal.cookies');
+Route::view('/termos-e-condicoes', 'web.terms-and-conditions')->name('legal.terms');
 
 Route::middleware(['auth', 'admin.role'])->prefix('admin')->name('admin.')->group(function () {
     Route::get('/', DashboardController::class)->name('dashboard');
