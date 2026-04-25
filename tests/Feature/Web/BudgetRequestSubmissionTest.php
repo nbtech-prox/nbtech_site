@@ -2,7 +2,9 @@
 
 namespace Tests\Feature\Web;
 
+use App\Mail\NewBudgetRequestMail;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Facades\Mail;
 use Tests\TestCase;
 
 class BudgetRequestSubmissionTest extends TestCase
@@ -19,6 +21,9 @@ class BudgetRequestSubmissionTest extends TestCase
 
     public function test_budget_form_creates_a_budget_request(): void
     {
+        Mail::fake();
+        config(['mail.recipients.budget' => 'orcamento@nbtech.pt']);
+
         $payload = [
             'name' => 'Miguel Costa',
             'email' => 'miguel@empresa.pt',
@@ -43,5 +48,10 @@ class BudgetRequestSubmissionTest extends TestCase
             'budget_range' => '2500-5000',
             'timeline' => '30-60-dias',
         ]);
+
+        Mail::assertSent(NewBudgetRequestMail::class, function (NewBudgetRequestMail $mail): bool {
+            return $mail->hasTo('orcamento@nbtech.pt')
+                && $mail->message->email === 'miguel@empresa.pt';
+        });
     }
 }

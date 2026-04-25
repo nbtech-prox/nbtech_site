@@ -115,4 +115,9 @@ return [
         'name' => env('MAIL_FROM_NAME', 'Example'),
     ],
 
+    'recipients' => [
+        'contact' => env('CONTACT_RECIPIENT_EMAIL', 'info@nbtech.pt'),
+        'budget' => env('BUDGET_RECIPIENT_EMAIL', 'orcamento@nbtech.pt'),
+    ],
+
 ];
