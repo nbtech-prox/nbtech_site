@@ -6,6 +6,7 @@ use App\Models\Quote;
 use App\Services\QuoteService;
 use App\Support\QuoteDocumentTypes;
 use Illuminate\Http\Response;
+use Symfony\Component\HttpFoundation\Response as SymfonyResponse;
 
 class DownloadQuoteDocument
 {
@@ -19,7 +20,11 @@ class DownloadQuoteDocument
 
         abort_unless(isset($types[$type]), 404);
 
-        $documentNumber = $this->quotes->resolveDocumentNumber($quote, $type);
+        try {
+            $documentNumber = $this->quotes->resolveDocumentNumber($quote, $type);
+        } catch (\DomainException $exception) {
+            abort(SymfonyResponse::HTTP_CONFLICT, $exception->getMessage());
+        }
 
         $pdf = app('dompdf.wrapper')->loadView('admin.quotes.pdf', [
             'quote' => $quote,

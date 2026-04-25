@@ -13,7 +13,7 @@ class AdminQuoteWorkflowTest extends TestCase
 {
     use RefreshDatabase;
 
-    public function test_downloading_quote_document_does_not_change_draft_status(): void
+    public function test_downloading_missing_issued_document_does_not_mutate_quote(): void
     {
         Role::findOrCreate('admin');
 
@@ -39,9 +39,9 @@ class AdminQuoteWorkflowTest extends TestCase
             'type' => 'proforma',
         ]));
 
-        $response->assertOk();
+        $response->assertConflict();
         $quote->refresh();
         $this->assertSame(QuoteStatuses::DRAFT, $quote->status);
-        $this->assertNotNull($quote->proforma_number);
+        $this->assertNull($quote->proforma_number);
     }
 }

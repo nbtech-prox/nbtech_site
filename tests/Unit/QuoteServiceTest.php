@@ -6,6 +6,7 @@ use App\Models\Quote;
 use App\Services\QuoteService;
 use App\Support\QuoteStatuses;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Validation\ValidationException;
 use Tests\TestCase;
 
 class QuoteServiceTest extends TestCase
@@ -108,7 +109,7 @@ class QuoteServiceTest extends TestCase
         $this->assertStringEndsWith('0002', $second->number);
     }
 
-    public function test_resolving_document_number_does_not_change_quote_status(): void
+    public function test_resolving_document_number_does_not_mutate_missing_document_numbers(): void
     {
         $service = app(QuoteService::class);
 
@@ -126,11 +127,75 @@ class QuoteServiceTest extends TestCase
             'total' => 123,
         ]);
 
-        $number = $service->resolveDocumentNumber($quote, 'proforma');
-        $quote->refresh();
+        $this->expectException(\DomainException::class);
 
-        $this->assertStringStartsWith('PRF-', $number);
-        $this->assertSame(QuoteStatuses::DRAFT, $quote->status);
-        $this->assertNotNull($quote->proforma_number);
+        try {
+            $service->resolveDocumentNumber($quote, 'proforma');
+        } finally {
+            $quote->refresh();
+
+            $this->assertSame(QuoteStatuses::DRAFT, $quote->status);
+            $this->assertNull($quote->proforma_number);
+        }
+    }
+
+    public function test_mark_invoiced_rejects_invalid_transition_from_paid(): void
+    {
+        $service = app(QuoteService::class);
+
+        $quote = Quote::query()->create([
+            'number' => 'ORC-202603-0001',
+            'title' => 'App mobile',
+            'status' => QuoteStatuses::PAID,
+            'document_type' => 'proforma',
+            'issue_date' => '2026-03-25',
+            'due_date' => '2026-04-10',
+            'client_name' => 'Empresa Y',
+            'tax_rate' => 23,
+            'subtotal' => 100,
+            'tax_total' => 23,
+            'total' => 123,
+        ]);
+
+        $this->expectException(ValidationException::class);
+
+        try {
+            $service->markInvoiced($quote);
+        } finally {
+            $quote->refresh();
+
+            $this->assertSame(QuoteStatuses::PAID, $quote->status);
+            $this->assertNull($quote->proforma_number);
+        }
+    }
+
+    public function test_mark_paid_rejects_invalid_transition_from_draft(): void
+    {
+        $service = app(QuoteService::class);
+
+        $quote = Quote::query()->create([
+            'number' => 'ORC-202603-0001',
+            'title' => 'App mobile',
+            'status' => QuoteStatuses::DRAFT,
+            'document_type' => 'proforma',
+            'issue_date' => '2026-03-25',
+            'due_date' => '2026-04-10',
+            'client_name' => 'Empresa Y',
+            'tax_rate' => 23,
+            'subtotal' => 100,
+            'tax_total' => 23,
+            'total' => 123,
+        ]);
+
+        $this->expectException(ValidationException::class);
+
+        try {
+            $service->markPaid($quote);
+        } finally {
+            $quote->refresh();
+
+            $this->assertSame(QuoteStatuses::DRAFT, $quote->status);
+            $this->assertNull($quote->invoice_receipt_number);
+        }
     }
 }

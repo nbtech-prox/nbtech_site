@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use App\Models\User;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
+use RuntimeException;
 use Spatie\Permission\Models\Role;
 
 class AdminUserSeeder extends Seeder
@@ -20,7 +21,13 @@ class AdminUserSeeder extends Seeder
         $admin->name = env('ADMIN_NAME', 'Admin NBTech');
 
         if (! $admin->exists || env('ADMIN_FORCE_RESET_PASSWORD', false)) {
-            $admin->password = Hash::make(env('ADMIN_PASSWORD', 'NBTechAdmin!2026'));
+            $password = env('ADMIN_PASSWORD');
+
+            if (app()->environment('production') && ! $password) {
+                throw new RuntimeException('ADMIN_PASSWORD must be set in production.');
+            }
+
+            $admin->password = Hash::make($password ?: 'NBTechAdmin!2026');
         }
 
         $admin->save();
