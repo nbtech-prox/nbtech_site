@@ -64,6 +64,16 @@ body {
     display: none !important;
 }
 
+#main-content > section:first-child {
+    padding-top: 2.5rem;
+}
+
+@media (min-width: 768px) {
+    #main-content > section:first-child {
+        padding-top: 3.5rem;
+    }
+}
+
 [data-reveal] {
     opacity: 0;
     transform: translateY(12px);
