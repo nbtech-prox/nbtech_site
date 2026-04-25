@@ -7,6 +7,7 @@ use App\Support\QuoteDocumentTypes;
 use App\Support\QuoteStatuses;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Validation\ValidationException;
 
 class QuoteService
 {
@@ -95,6 +96,12 @@ class QuoteService
 
     public function markInvoiced(Quote $quote): Quote
     {
+        if (! $quote->canMarkInvoiced()) {
+            throw ValidationException::withMessages([
+                'status' => 'Este orçamento não pode ser marcado como emitido no estado atual.',
+            ]);
+        }
+
         return DB::transaction(function () use ($quote): Quote {
             $quote->update(['status' => QuoteStatuses::EMITTED]);
 
@@ -116,6 +123,12 @@ class QuoteService
 
     public function markPaid(Quote $quote): Quote
     {
+        if (! $quote->canMarkPaid()) {
+            throw ValidationException::withMessages([
+                'status' => 'Este orçamento não pode ser marcado como pago no estado atual.',
+            ]);
+        }
+
         return DB::transaction(function () use ($quote): Quote {
             $quote->update(['status' => QuoteStatuses::PAID]);
 
@@ -131,29 +144,23 @@ class QuoteService
 
     public function resolveDocumentNumber(Quote $quote, string $type): string
     {
-        return DB::transaction(function () use ($quote, $type): string {
-            if ($type === 'orcamento') {
-                return $quote->number;
+        if ($type === 'orcamento') {
+            return $quote->number;
+        }
+
+        if ($type === QuoteDocumentTypes::PROFORMA) {
+            if (! $quote->proforma_number) {
+                throw new \DomainException('A fatura proforma ainda não foi emitida.');
             }
 
-            if ($type === QuoteDocumentTypes::PROFORMA) {
-                if (! $quote->proforma_number) {
-                    $quote->update([
-                        'proforma_number' => $this->generateDocumentNumber('proforma_number', 'PRF'),
-                    ]);
-                }
+            return (string) $quote->proforma_number;
+        }
 
-                return (string) $quote->fresh()->proforma_number;
-            }
+        if (! $quote->invoice_receipt_number) {
+            throw new \DomainException('A fatura/recibo ainda não foi emitida.');
+        }
 
-            if (! $quote->invoice_receipt_number) {
-                $quote->update([
-                    'invoice_receipt_number' => $this->generateDocumentNumber('invoice_receipt_number', 'FR'),
-                ]);
-            }
-
-            return (string) $quote->fresh()->invoice_receipt_number;
-        });
+        return (string) $quote->invoice_receipt_number;
     }
 
     /**

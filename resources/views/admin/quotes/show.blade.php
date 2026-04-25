@@ -11,8 +11,13 @@
             <p class="text-sm text-slate-600 dark:text-slate-300">{{ $quote->client_name }}</p>
         </div>
         <div class="flex flex-wrap gap-2">
-            <a href="{{ route('admin.quotes.pdf', [$quote, 'proforma']) }}?v={{ now()->timestamp }}" class="btn-secondary">PDF Fatura Proforma</a>
-            <a href="{{ route('admin.quotes.pdf', [$quote, 'fatura-recibo']) }}?v={{ now()->timestamp }}" class="btn-secondary">PDF Fatura/Recibo</a>
+            <a href="{{ route('admin.quotes.pdf', [$quote, 'orcamento']) }}?v={{ now()->timestamp }}" class="btn-secondary">PDF Orçamento</a>
+            @if ($quote->proforma_number)
+                <a href="{{ route('admin.quotes.pdf', [$quote, 'proforma']) }}?v={{ now()->timestamp }}" class="btn-secondary">PDF Fatura Proforma</a>
+            @endif
+            @if ($quote->invoice_receipt_number)
+                <a href="{{ route('admin.quotes.pdf', [$quote, 'fatura-recibo']) }}?v={{ now()->timestamp }}" class="btn-secondary">PDF Fatura/Recibo</a>
+            @endif
             @if ($canMarkInvoiced)
                 <form method="POST" action="{{ route('admin.quotes.mark-invoiced', $quote) }}">
                     @csrf
