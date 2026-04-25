@@ -79,7 +79,7 @@
             </nav>
         </header>
 
-        <main id="main-content" class="pt-28 md:pt-32">
+        <main id="main-content" class="pt-20">
             @yield('content')
         </main>
 
