@@ -73,7 +73,7 @@
 
         @if ($services->isNotEmpty())
             <div class="mt-14" data-reveal>
-                <div class="mb-6 flex items-end justify-between gap-6">
+                <div class="mb-6 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
                     <div>
                         <span class="chip-brand">Outros serviços</span>
                         <h2 class="mt-4 font-display text-3xl leading-[1.02] sm:text-4xl xl:text-[2.2rem]">Explora outras prioridades possíveis</h2>

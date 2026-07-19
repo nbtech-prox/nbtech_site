@@ -133,7 +133,7 @@
     @endif
 
     <section class="container-fluid py-20">
-        <div class="mb-8 flex items-end justify-between" data-reveal>
+        <div class="mb-8 flex flex-col gap-4 md:flex-row md:items-end md:justify-between" data-reveal>
             <div class="space-y-5">
                 <span class="chip-brand">Serviços</span>
                 <h2 class="font-display text-3xl leading-[1.02] sm:text-4xl xl:text-[2.2rem]">Intervenções desenhadas para resolver prioridades reais</h2>
@@ -180,7 +180,7 @@
     </section>
 
     <section class="container-fluid py-20">
-        <div class="mb-8 flex items-end justify-between" data-reveal>
+        <div class="mb-8 flex flex-col gap-4 md:flex-row md:items-end md:justify-between" data-reveal>
             <div class="space-y-5">
                 <span class="chip-brand">Portfólio</span>
                 <h2 class="font-display text-3xl leading-[1.02] sm:text-4xl xl:text-[2.2rem]">Projetos em destaque</h2>
@@ -203,7 +203,7 @@
                     $imageSrcVersioned = $imageSrc.(str_contains($imageSrc, '?') ? '&' : '?').'v='.$mediaVersion;
                 @endphp
                 <article class="group relative overflow-hidden rounded-[1.6rem] border border-[#b8c1cf] bg-[#0a0e15] text-white dark:border-[#4e576a] dark:bg-[#212631]" data-reveal>
-                    <img src="{{ $imageSrcVersioned }}" alt="{{ $project->title }}" class="h-72 w-full object-cover transition duration-500 group-hover:scale-105" loading="lazy">
+                    <img src="{{ $imageSrcVersioned }}" alt="{{ $project->title }}" class="h-48 w-full object-cover transition duration-500 group-hover:scale-105 sm:h-72" loading="lazy">
                     <div class="absolute inset-0 bg-[#0a0e15]/72"></div>
                     <div class="absolute inset-x-0 bottom-0 p-5">
                         <h3 class="text-xl font-semibold">{{ $project->title }}</h3>

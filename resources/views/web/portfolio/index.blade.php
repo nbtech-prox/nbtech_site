@@ -52,7 +52,7 @@
                     $imageSrcVersioned = $imageSrc.(str_contains($imageSrc, '?') ? '&' : '?').'v='.$mediaVersion;
                 @endphp
                 <article class="group relative overflow-hidden rounded-[1.6rem] border border-[#b8c1cf] bg-[#0a0e15] text-white dark:border-[#4e576a] dark:bg-[#212631]" data-reveal>
-                    <img src="{{ $imageSrcVersioned }}" alt="{{ $project->title }}" class="h-72 w-full object-cover transition duration-500 group-hover:scale-105" loading="lazy">
+                    <img src="{{ $imageSrcVersioned }}" alt="{{ $project->title }}" class="h-48 w-full object-cover transition duration-500 group-hover:scale-105 sm:h-72" loading="lazy">
                     <div class="absolute inset-0 bg-[#0a0e15]/72 opacity-95 transition group-hover:opacity-100"></div>
                     <div class="absolute inset-x-0 bottom-0 p-5">
                         <p class="mb-2 text-[11px] font-semibold uppercase tracking-[0.16em] text-brand-300">{{ $project->category }}</p>
