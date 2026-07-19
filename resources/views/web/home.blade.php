@@ -54,7 +54,7 @@
             <div class="space-y-8" data-reveal>
                 <span class="chip-brand">Estratégia, design e tecnologia aplicada ao negocio</span>
                 <div class="max-w-4xl space-y-5">
-                    <h1 class="font-display text-2xl leading-[1.02] text-zinc-900 dark:text-[#f3ede4] sm:text-3xl md:text-4xl xl:text-[2.35rem]">Produtos digitais mais claros, mais fortes e mais preparados para crescer.</h1>
+                    <h1 class="font-display text-xl leading-[1.15] text-zinc-900 dark:text-[#f3ede4] sm:text-3xl md:text-4xl xl:text-[2.35rem]">Produtos digitais mais claros, mais fortes e mais preparados para crescer.</h1>
                     <p class="max-w-3xl text-lg leading-8 text-[#4e576a] dark:text-[#dbe2ec]">A NBTech ajuda empresas a lançar websites, plataformas, aplicações e automações com foco em clareza comercial, estrutura técnica sólida e execução sem ruído.</p>
                 </div>
                 <div class="flex flex-wrap items-center gap-3 text-[11px] font-semibold uppercase tracking-[0.16em] text-[#6a7387] dark:text-[#b7c0cf]">
@@ -85,7 +85,7 @@
             <div class="space-y-4" data-reveal>
                 <article class="rounded-[2rem] border border-[#cad4e3] bg-white/85 p-6 shadow-[0_30px_80px_-50px_rgba(15,23,42,0.55)] backdrop-blur dark:border-[#2f3b4d] dark:bg-[#101722]/90">
                     <p class="text-[11px] font-semibold uppercase tracking-[0.16em] text-brand-600">Processo</p>
-                    <h2 class="mt-3 font-display text-3xl leading-none">Avancar com clareza antes de investir mal.</h2>
+                    <h2 class="mt-3 font-display text-2xl leading-none sm:text-3xl">Avancar com clareza antes de investir mal.</h2>
                     <div class="mt-6 space-y-4">
                         @foreach ([
                             ['step' => '01', 'title' => 'Diagnóstico', 'text' => 'Percebemos contexto, objetivo e principal bloqueio.'],
@@ -110,7 +110,7 @@
                 <div class="mb-6 flex flex-col gap-3 md:flex-row md:items-end md:justify-between">
                     <div class="space-y-3">
                         <span class="chip-brand">Confianca</span>
-                        <h2 class="font-display text-4xl leading-none md:text-5xl">Empresas que ja confiaram na NBTech</h2>
+                        <h2 class="font-display text-2xl leading-none sm:text-4xl md:text-5xl">Empresas que ja confiaram na NBTech</h2>
                     </div>
                     <p class="max-w-2xl text-sm text-[#4e576a] dark:text-[#e0e4eb]">Prova social relevante reduz risco percebido e ajuda a transformar interesse em contacto qualificado.</p>
                 </div>
@@ -133,10 +133,10 @@
     @endif
 
     <section class="container-fluid py-20">
-        <div class="mb-8 flex items-end justify-between" data-reveal>
+        <div class="mb-8 flex flex-col gap-4 md:flex-row md:items-end md:justify-between" data-reveal>
             <div class="space-y-5">
                 <span class="chip-brand">Serviços</span>
-                <h2 class="font-display text-3xl leading-[1.02] sm:text-4xl xl:text-[2.2rem]">Intervenções desenhadas para resolver prioridades reais</h2>
+                <h2 class="font-display text-2xl leading-[1.02] sm:text-4xl xl:text-[2.2rem]">Intervenções desenhadas para resolver prioridades reais</h2>
             </div>
             <a href="{{ route('services.index') }}" class="btn-secondary">Explorar serviços</a>
         </div>
@@ -180,10 +180,10 @@
     </section>
 
     <section class="container-fluid py-20">
-        <div class="mb-8 flex items-end justify-between" data-reveal>
+        <div class="mb-8 flex flex-col gap-4 md:flex-row md:items-end md:justify-between" data-reveal>
             <div class="space-y-5">
                 <span class="chip-brand">Portfólio</span>
-                <h2 class="font-display text-3xl leading-[1.02] sm:text-4xl xl:text-[2.2rem]">Projetos em destaque</h2>
+                <h2 class="font-display text-2xl leading-[1.02] sm:text-4xl xl:text-[2.2rem]">Projetos em destaque</h2>
             </div>
             <a href="{{ route('portfolio.index') }}" class="btn-secondary">Todos os projetos</a>
         </div>
@@ -221,7 +221,7 @@
         <div class="mb-8 flex flex-col gap-4 md:flex-row md:items-end md:justify-between" data-reveal>
             <div>
                 <span class="chip-brand">Método</span>
-                <h2 class="mt-4 font-display text-3xl leading-[1.02] sm:text-4xl xl:text-[2.2rem]">Como transformamos contexto em direção prática.</h2>
+                <h2 class="mt-4 font-display text-2xl leading-[1.02] sm:text-4xl xl:text-[2.2rem]">Como transformamos contexto em direção prática.</h2>
             </div>
             <p class="max-w-2xl text-sm leading-7 text-[#5b667b] dark:text-[#c5cedb]">Sem sobrecarregar o processo. O objetivo é perceber depressa o que importa, definir prioridade e executar com critério.</p>
         </div>
