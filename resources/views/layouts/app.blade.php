@@ -31,13 +31,13 @@
         <a href="#main-content" class="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-[120] focus:rounded-lg focus:bg-brand-600 focus:px-4 focus:py-2 focus:text-sm focus:font-semibold focus:text-white">
             Saltar para o conteúdo
         </a>
-        <div class="fixed inset-x-0 top-0 z-[51] border-b border-[#dbe2ee] bg-white/80 text-[11px] font-semibold uppercase tracking-[0.16em] text-[#526076] backdrop-blur dark:border-[#243041] dark:bg-[#0d1320]/88 dark:text-[#bfc8d6]">
+        <div class="border-b border-[#dbe2ee] bg-white/80 text-[11px] font-semibold uppercase tracking-[0.16em] text-[#526076] backdrop-blur dark:border-[#243041] dark:bg-[#0d1320]/88 dark:text-[#bfc8d6]">
             <div class="container-fluid flex min-h-11 flex-wrap items-center justify-between gap-3 py-2">
-                <span class="text-[11px] sm:text-xs">NBTech · websites, plataformas e automação com foco em resultado</span>
-                <a href="{{ route('budget.index') }}" class="text-xs transition hover:text-brand-600 dark:hover:text-brand-300">Pedir avaliação inicial</a>
+                <span>NBTech · websites, plataformas e automação com foco em resultado</span>
+                <a href="{{ route('budget.index') }}" class="transition hover:text-brand-600 dark:hover:text-brand-300">Pedir avaliação inicial</a>
             </div>
         </div>
-        <header x-data="{ mobileOpen: false }" class="fixed inset-x-0 top-[44px] z-50 border-b border-[#dbe2ee] bg-white/84 backdrop-blur dark:border-[#2f3b4d] dark:bg-[#0b121d]/88">
+        <header x-data="{ mobileOpen: false }" class="fixed inset-x-0 top-0 z-50 border-b border-[#dbe2ee] bg-white/84 backdrop-blur dark:border-[#2f3b4d] dark:bg-[#0b121d]/88">
             <div class="container-fluid flex h-20 items-center justify-between gap-5 py-3">
                 <a href="{{ route('home') }}" class="flex items-center gap-3">
                     <picture>
@@ -79,11 +79,7 @@
             </nav>
         </header>
 
-        <div x-cloak x-show="mobileOpen" x-transition.opacity
-             class="fixed inset-0 z-40 bg-black/30 lg:hidden"
-             @click="mobileOpen = false"></div>
-
-        <main id="main-content" class="pt-[124px]">
+        <main id="main-content" class="pt-20">
             @yield('content')
         </main>
 

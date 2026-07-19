@@ -14,7 +14,7 @@
                     <source srcset="/branding/logo/logo-clean.webp" type="image/webp">
                     <img src="/branding/logo/logo-clean.png" alt="NBTech" class="h-16 w-16 object-contain shadow-sm">
                 </picture>
-                <h1 class="font-display text-4xl leading-none text-[#0a0e15] dark:text-white sm:text-7xl">Painel Admin</h1>
+                <h1 class="font-display text-7xl leading-none text-[#0a0e15] dark:text-white">Painel Admin</h1>
                 <p class="text-[#4e576a] dark:text-[#e0e4eb]">Acede ao dashboard de gestão de conteúdos e oportunidades da NBTech.</p>
                 @include('partials.theme-toggle')
             </div>
