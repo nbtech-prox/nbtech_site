@@ -1,0 +1,36 @@
+# NBTech — .dockerignore
+# Excluir do build Docker o que não é preciso em runtime
+
+.vscode
+.git
+.gitattributes
+.gitignore
+.env
+.env.example
+.env.testing
+.gitlab-ci.yml
+
+node_modules/
+vendor/
+
+tests/
+docs/
+storage/app/public/
+storage/debugbar/
+storage/framework/cache/data/
+storage/framework/sessions/
+storage/framework/testing/
+storage/logs/*.log
+storage/views/
+
+.editorconfig
+.dockerignore
+Makefile
+*.md
+composer.lock
+package-lock.json
+phpunit.xml
+phpstan.neon
+pint.json
+tailwind.config.js
+tsconfig.json

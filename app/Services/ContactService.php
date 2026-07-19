@@ -8,6 +8,7 @@ use App\Models\ContactMessage;
 use App\Repositories\ContactMessageRepository;
 use App\Support\ContactMessageTypes;
 use Illuminate\Support\Facades\Mail;
+use Throwable;
 
 class ContactService
 {
@@ -23,7 +24,7 @@ class ContactService
             'type' => ContactMessageTypes::CONTACT,
         ]);
 
-        Mail::to(config('mail.recipients.contact'))->send(new NewContactMessageMail($message));
+        $this->sendNotification(fn () => Mail::to(config('mail.recipients.contact'))->send(new NewContactMessageMail($message)));
 
         return $message;
     }
@@ -38,8 +39,17 @@ class ContactService
             'type' => ContactMessageTypes::BUDGET,
         ]);
 
-        Mail::to(config('mail.recipients.budget'))->send(new NewBudgetRequestMail($message));
+        $this->sendNotification(fn () => Mail::to(config('mail.recipients.budget'))->send(new NewBudgetRequestMail($message)));
 
         return $message;
+    }
+
+    private function sendNotification(callable $callback): void
+    {
+        try {
+            $callback();
+        } catch (Throwable $exception) {
+            report($exception);
+        }
     }
 }

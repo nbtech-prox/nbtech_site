@@ -5,6 +5,7 @@ namespace Tests\Feature\Web;
 use App\Mail\NewBudgetRequestMail;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Mail;
+use RuntimeException;
 use Tests\TestCase;
 
 class BudgetRequestSubmissionTest extends TestCase
@@ -53,5 +54,37 @@ class BudgetRequestSubmissionTest extends TestCase
             return $mail->hasTo('orcamento@nbtech.pt')
                 && $mail->message->email === 'miguel@empresa.pt';
         });
+    }
+
+    public function test_budget_form_still_succeeds_when_mail_delivery_fails(): void
+    {
+        config(['mail.recipients.budget' => 'orcamento@nbtech.pt']);
+
+        Mail::shouldReceive('to')
+            ->once()
+            ->with('orcamento@nbtech.pt')
+            ->andThrow(new RuntimeException('SMTP indisponível'));
+
+        $payload = [
+            'name' => 'Miguel Costa',
+            'email' => 'miguel@empresa.pt',
+            'company' => 'Empresa PT',
+            'phone' => '+351912345678',
+            'project_type' => 'website',
+            'budget_range' => '2500-5000',
+            'timeline' => '30-60-dias',
+            'message' => 'Precisamos de um novo website com foco em conversao e geracao de leads.',
+        ];
+
+        $response = $this->post(route('budget.store'), $payload);
+
+        $response->assertRedirect();
+        $response->assertSessionHas('status');
+
+        $this->assertDatabaseHas('contact_messages', [
+            'email' => 'miguel@empresa.pt',
+            'name' => 'Miguel Costa',
+            'type' => 'budget',
+        ]);
     }
 }

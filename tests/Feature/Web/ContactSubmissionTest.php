@@ -5,6 +5,7 @@ namespace Tests\Feature\Web;
 use App\Mail\NewContactMessageMail;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Mail;
+use RuntimeException;
 use Tests\TestCase;
 
 class ContactSubmissionTest extends TestCase
@@ -38,5 +39,31 @@ class ContactSubmissionTest extends TestCase
             return $mail->hasTo('info@nbtech.pt')
                 && $mail->message->email === 'rita@empresa.pt';
         });
+    }
+
+    public function test_contact_form_still_succeeds_when_mail_delivery_fails(): void
+    {
+        config(['mail.recipients.contact' => 'info@nbtech.pt']);
+
+        Mail::shouldReceive('to')
+            ->once()
+            ->with('info@nbtech.pt')
+            ->andThrow(new RuntimeException('SMTP indisponível'));
+
+        $response = $this->post(route('contact.store'), [
+            'name' => 'Rita Silva',
+            'email' => 'rita@empresa.pt',
+            'company' => 'Empresa PT',
+            'message' => 'Mensagem geral para testar falha de email.',
+        ]);
+
+        $response->assertRedirect();
+        $response->assertSessionHas('status', 'Mensagem enviada com sucesso. A NBTech recebeu o teu contacto e responderá assim que possível.');
+
+        $this->assertDatabaseHas('contact_messages', [
+            'email' => 'rita@empresa.pt',
+            'name' => 'Rita Silva',
+            'type' => 'contact',
+        ]);
     }
 }

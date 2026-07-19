@@ -1,0 +1,43 @@
+# ──────────────────────────────────────────────
+# NBTech — Queue Worker (systemd)
+# Copiar para /etc/systemd/system/nbtech-worker.service
+# systemctl enable --now nbtech-worker
+# ──────────────────────────────────────────────
+
+[Unit]
+Description=NBTech Queue Worker
+After=network.target
+After=postgresql.service
+Requires=postgresql.service
+
+[Service]
+Type=simple
+User=www-data
+Group=www-data
+Restart=always
+RestartSec=5s
+
+WorkingDirectory=/var/www/nbtech
+ExecStart=/usr/bin/php artisan queue:work \
+    --queue=default \
+    --sleep=1 \
+    --tries=3 \
+    --max-time=3600
+
+# Slow shutdown — let the worker finish its current job
+ExecStop=/usr/bin/php artisan queue:restart
+TimeoutStopSec=180
+
+# Logs
+StandardOutput=journal
+StandardError=journal
+
+# Security hardening
+ProtectSystem=strict
+ProtectHome=true
+PrivateTmp=true
+NoNewPrivileges=true
+ReadWritePaths=/var/www/nbtech/storage
+
+[Install]
+WantedBy=multi-user.target
