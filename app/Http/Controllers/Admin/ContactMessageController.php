@@ -12,7 +12,9 @@ use Illuminate\View\View;
 
 class ContactMessageController extends Controller
 {
-    public function index(Request $request, ContactMessageRepository $messages): View
+    public function __construct(private readonly ContactMessageRepository $messages) {}
+
+    public function index(Request $request): View
     {
         $this->authorize('viewAny', ContactMessage::class);
 
@@ -24,7 +26,7 @@ class ContactMessageController extends Controller
         }
 
         return view('admin.messages.index', [
-            'messages' => $messages->latestPaginated(
+            'messages' => $this->messages->latestPaginated(
                 $request->string('q')->toString() ?: null,
                 $selectedType !== '' ? $selectedType : null,
             ),
@@ -40,14 +42,24 @@ class ContactMessageController extends Controller
 
         return view('admin.messages.show', [
             'message' => $message,
+            'nextMessage' => $this->messages->nextAfter($message),
         ]);
     }
 
-    public function destroy(ContactMessage $message): RedirectResponse
+    public function destroy(Request $request, ContactMessage $message): RedirectResponse
     {
         $this->authorize('delete', $message);
 
         $message->delete();
+
+        if ($request->boolean('redirect_to_next')) {
+            $next = $this->messages->nextAfter($message);
+
+            if ($next) {
+                return redirect()->route('admin.messages.show', $next)
+                    ->with('status', 'Mensagem removida. A mostrar a mensagem seguinte.');
+            }
+        }
 
         return redirect()->route('admin.messages.index')
             ->with('status', 'Mensagem removida com sucesso.');

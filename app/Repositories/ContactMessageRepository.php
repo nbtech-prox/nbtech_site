@@ -33,4 +33,20 @@ class ContactMessageRepository
             ->limit($limit)
             ->get();
     }
+
+    public function nextAfter(ContactMessage $message): ?ContactMessage
+    {
+        /** @var ContactMessage|null $next */
+        $next = ContactMessage::query()
+            ->where('created_at', '<', $message->created_at)
+            ->orWhere(function ($query) use ($message): void {
+                $query->where('created_at', '=', $message->created_at)
+                    ->where('id', '<', $message->id);
+            })
+            ->latest('created_at')
+            ->latest('id')
+            ->first();
+
+        return $next;
+    }
 }

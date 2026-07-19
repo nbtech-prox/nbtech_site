@@ -57,6 +57,18 @@
         <h2 class="mb-2 text-base font-semibold">Mensagem</h2>
         <p class="whitespace-pre-wrap text-slate-700 dark:text-slate-200">{{ $message->message }}</p>
 
-        <a href="{{ route('admin.messages.index') }}" class="btn-secondary mt-6">Voltar</a>
+        <div class="mt-6 flex flex-wrap items-center gap-3">
+            <a href="{{ route('admin.messages.index') }}" class="btn-secondary">Voltar</a>
+
+            <form method="POST" action="{{ route('admin.messages.destroy', $message) }}" x-data x-ref="deleteForm">
+                @csrf
+                @method('DELETE')
+                <input type="hidden" name="redirect_to_next" value="1">
+                <button type="button" class="btn-danger" @click="if (confirm('Eliminar esta mensagem e ir para a seguinte?')) $refs.deleteForm.submit()">
+                    <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18"/><path d="M8 6V4h8v2"/><path d="M19 6l-1 14H6L5 6"/><path d="M10 11v6M14 11v6"/></svg>
+                    Eliminar e seguinte
+                </button>
+            </form>
+        </div>
     </article>
 @endsection

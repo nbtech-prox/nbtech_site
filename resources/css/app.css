@@ -143,6 +143,26 @@ select:focus-visible {
     color: var(--color-brand-300);
 }
 
+.btn-danger {
+    @apply inline-flex items-center justify-center gap-1.5 rounded-lg px-4 py-2.5 text-sm font-semibold transition;
+    background: #e11d48;
+    color: #fff;
+    border: none;
+}
+
+.btn-danger:hover {
+    background: #be123c;
+}
+
+.dark .btn-danger {
+    background: #e11d48;
+    color: #fff;
+}
+
+.dark .btn-danger:hover {
+    background: #f43f5e;
+}
+
 .brand-wordmark {
     font-family: 'Gugi', ui-rounded, sans-serif;
     font-weight: 800;
