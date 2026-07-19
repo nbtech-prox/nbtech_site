@@ -15,13 +15,6 @@ vendor/
 
 tests/
 docs/
-storage/app/public/
-storage/debugbar/
-storage/framework/cache/data/
-storage/framework/sessions/
-storage/framework/testing/
-storage/logs/*.log
-storage/views/
 
 .editorconfig
 .dockerignore
