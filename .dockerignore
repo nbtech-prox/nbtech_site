@@ -27,8 +27,6 @@ storage/views/
 .dockerignore
 Makefile
 *.md
-composer.lock
-package-lock.json
 phpunit.xml
 phpstan.neon
 pint.json
