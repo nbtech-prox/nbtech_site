@@ -27,6 +27,7 @@ storage/views/
 .dockerignore
 Makefile
 *.md
+public/build/
 phpunit.xml
 phpstan.neon
 pint.json
