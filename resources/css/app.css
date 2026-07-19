@@ -37,7 +37,7 @@
 @custom-variant dark (&:where(.dark, .dark *));
 
 body {
-    @apply antialiased;
+    @apply antialiased break-words;
     background: #f0f1f5;
     color: #0a0e15;
 }

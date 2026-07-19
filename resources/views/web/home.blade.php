@@ -47,7 +47,7 @@
         };
     @endphp
 
-    <section class="container-fluid relative py-20 md:py-28">
+    <section class="container-fluid relative py-14 md:py-28">
         <div class="pointer-events-none absolute inset-x-0 top-4 -z-10 h-72 rounded-[3rem] bg-[radial-gradient(circle_at_top_left,_rgba(59,130,246,0.12),_transparent_34%),radial-gradient(circle_at_top_right,_rgba(249,115,22,0.12),_transparent_24%)] blur-3xl"></div>
         <div class="pointer-events-none absolute right-[8%] top-20 -z-10 h-40 w-40 rounded-full border border-[#d6deea] bg-white/30 blur-sm dark:border-[#334053] dark:bg-white/5"></div>
         <div class="grid gap-12 lg:grid-cols-[1.15fr_0.85fr] lg:items-end">
@@ -132,7 +132,7 @@
         </section>
     @endif
 
-    <section class="container-fluid py-20">
+    <section class="container-fluid py-14 md:py-20">
         <div class="mb-8 flex flex-col gap-4 md:flex-row md:items-end md:justify-between" data-reveal>
             <div class="space-y-5">
                 <span class="chip-brand">Serviços</span>
@@ -170,7 +170,7 @@
                     @endif
                     <h3 class="mb-2 text-xl font-semibold">{{ $service->title }}</h3>
                     <p class="text-sm text-[#4e576a] dark:text-[#e0e4eb]">{{ $service->description }}</p>
-                    <div class="mt-5 flex items-center justify-between gap-3 border-t border-[#d4dbe7] pt-4 text-xs font-semibold uppercase tracking-[0.14em] text-[#667086] dark:border-[#333f52] dark:text-[#b6c0cf]">
+                    <div class="mt-5 flex flex-wrap items-center justify-between gap-3 border-t border-[#d4dbe7] pt-4 text-xs font-semibold uppercase tracking-[0.14em] text-[#667086] dark:border-[#333f52] dark:text-[#b6c0cf]">
                         <span>Planeamento + execucao</span>
                         <a href="{{ route('services.show', $service) }}" class="text-brand-600 transition group-hover:translate-x-0.5">Ver serviço</a>
                     </div>
@@ -179,7 +179,7 @@
         </div>
     </section>
 
-    <section class="container-fluid py-20">
+    <section class="container-fluid py-14 md:py-20">
         <div class="mb-8 flex flex-col gap-4 md:flex-row md:items-end md:justify-between" data-reveal>
             <div class="space-y-5">
                 <span class="chip-brand">Portfólio</span>
@@ -217,7 +217,7 @@
         </div>
     </section>
 
-    <section class="container-fluid py-20">
+    <section class="container-fluid py-14 md:py-20">
         <div class="mb-8 flex flex-col gap-4 md:flex-row md:items-end md:justify-between" data-reveal>
             <div>
                 <span class="chip-brand">Método</span>
@@ -244,7 +244,7 @@
         </div>
     </section>
 
-    <section class="container-fluid py-20">
+    <section class="container-fluid py-14 md:py-20">
         <div class="rounded-[2.2rem] border border-[#cad4e3] bg-white/92 p-8 shadow-[0_36px_90px_-60px_rgba(15,23,42,0.45)] dark:border-[#2f3b4d] dark:bg-[#111823] md:p-12" data-reveal>
             <div class="grid gap-6 lg:grid-cols-[1.05fr_0.95fr] lg:items-end">
                 <div>
