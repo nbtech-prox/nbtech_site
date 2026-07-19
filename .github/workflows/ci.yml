@@ -94,9 +94,8 @@ jobs:
         run: |
           cp .env.example .env
           php artisan key:generate
-          sed -i "s/DB_HOST=127.0.0.1/DB_HOST=127.0.0.1/" .env
-          sed -i "s/DB_DATABASE=.*/DB_DATABASE=nbtech_test/" .env
-          sed -i "s/DB_PASSWORD=.*/DB_PASSWORD=postgres/" .env
+          sed -i "s|DB_DATABASE=.*|DB_DATABASE=nbtech_test|" .env
+          sed -i "s|DB_PASSWORD=.*|DB_PASSWORD=postgres|" .env
 
       - name: Run migrations
         run: php artisan migrate --force
@@ -106,7 +105,7 @@ jobs:
           DB_PASSWORD: postgres
 
       - name: Run tests
-        run: php artisan test --parallel --no-coverage
+        run: php artisan test --no-coverage
         env:
           APP_ENV: testing
           DB_DATABASE: nbtech_test
